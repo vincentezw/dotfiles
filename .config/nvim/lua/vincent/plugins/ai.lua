@@ -13,7 +13,7 @@ return {
         suggestion = {
           enabled = true,
           auto_trigger = true,
-          accept = false, -- disable built-in keymapping
+          -- accept = false, -- disable built-in keymapping
         },
       })
 
