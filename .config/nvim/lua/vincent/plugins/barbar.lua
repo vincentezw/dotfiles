@@ -6,10 +6,20 @@ return {
   },
   init = function()
     vim.g.barbar_auto_setup = false
-    vim.cmd("command! -bar -nargs=0 WQ w | BufferClose")
+    vim.cmd([[
+    function! CloseOrQuit() abort
+      if bufnr('$') > 1
+        silent! BufferClose
+      else
+        quit
+      endif
+    endfunction
+    ]])
+
+    vim.cmd("command! -bar -nargs=0 WQ w | call CloseOrQuit()")
     vim.cmd("command! -bar -nargs=0 Wq WQ")
     vim.cmd("cabbrev wq WQ")
-    vim.cmd("command! -bar -nargs=0 Q BufferClose")
+    vim.cmd("command! -bar -nargs=0 Q call CloseOrQuit()")
     vim.cmd("cnoreabbrev q Q")
 
     local map = vim.api.nvim_set_keymap

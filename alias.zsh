@@ -9,7 +9,7 @@ alias gd='git diff'
 alias gc='git commit -a -m'
 alias gca='git commit --amend'
 alias gcane='git commit --amend --no-edit'
-alias gd='git diff'
+alias gd="git diff -- . ':(exclude)package-lock.json'"
 alias gds='git diff --staged'
 
 alias npi='npm install'
