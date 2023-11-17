@@ -1,21 +1,22 @@
 return {
   "romgrk/barbar.nvim",
   dependencies = {
-    "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+    "lewis6991/gitsigns.nvim",
     "nvim-tree/nvim-web-devicons",
   },
   init = function()
     vim.g.barbar_auto_setup = false
     vim.cmd([[
     function! CloseOrQuit() abort
-      if bufnr('$') > 1
+      let buffer_count = len(split(execute(':ls'), "\n")) - 2
+      if buffer_count >= 0  
         silent! BufferClose
       else
+        Neotree close
         quit
       endif
     endfunction
     ]])
-
     vim.cmd("command! -bar -nargs=0 WQ w | call CloseOrQuit()")
     vim.cmd("command! -bar -nargs=0 Wq WQ")
     vim.cmd("cabbrev wq WQ")
