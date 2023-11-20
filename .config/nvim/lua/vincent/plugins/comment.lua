@@ -9,6 +9,9 @@ return {
     local comment = require("Comment")
 
     local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
+    require("ts_context_commentstring").setup({})
+    -- set vim.g.skip_ts_context_commentstring_module = true
+    vim.g.skip_ts_context_commentstring_module = true
 
     -- enable comment
     comment.setup({
