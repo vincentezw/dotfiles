@@ -21,11 +21,17 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      },
+      format_on_save = function()
+        if vim.fn.expand('%:t') == 'manifest.yaml' then
+          return false
+        else
+          return {
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 1000,
+          }
+        end
+      end
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
@@ -37,4 +43,3 @@ return {
     end, { desc = "Format file or range (in visual mode)" })
   end,
 }
-
