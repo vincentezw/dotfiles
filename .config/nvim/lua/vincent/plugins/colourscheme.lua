@@ -1,27 +1,29 @@
 return {
-  -- {
-  --   "bluz71/vim-nightfly-guicolors",
-  --   priority = 1000, -- make sure to load this before all the other start plugins
-  --   config = function()
-  --     -- loadhi the colorscheme here
-  --     vim.cmd([[colorscheme nightfly]])
-  --   end,
-  -- },
   {
-    "navarasu/onedark.nvim",
+    "nyoom-engineering/oxocarbon.nvim",
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require("onedark").setup({
-        commentStyle = "italic",
-        keywordStyle = "italic",
-        functionStyle = "italic",
-        variableStyle = "italic",
-        transparent = true,
-        sidebars = { "qf", "vista_kind", "terminal", "packer" },
-      })
-      -- loadhi the colorscheme here
-      vim.cmd([[colorscheme onedark]])
+      vim.opt.background = "dark" -- set this to dark or light
+      vim.cmd("colorscheme oxocarbon")
+      -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
   },
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   config = function()
+  --     require("onedark").setup({
+  --       commentStyle = "italic",
+  --       keywordStyle = "italic",
+  --       functionStyle = "italic",
+  --       variableStyle = "italic",
+  --       transparent = true,
+  --       sidebars = { "qf", "vista_kind", "terminal", "packer" },
+  --     })
+  --     -- loadhi the colorscheme here
+  --     -- vim.cmd([[colorscheme onedark]])
+  --   end,
+  -- },
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",

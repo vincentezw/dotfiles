@@ -14,6 +14,7 @@ return {
       return
     end
     neo_tree.setup({
+      popup_border_style = "solid",
       -- closes neotree automatically when it's the last **WINDOW** in the view
       auto_close = true,
       open_on_setup = false,
@@ -23,7 +24,7 @@ return {
       disable_on_buf_enter = false,
       hijack_cursor = true,
       follow_current_file = {
-        enabled = false,
+        enabled = true,
       },
       add_trailing = true,
       group_empty = true,
@@ -35,11 +36,12 @@ return {
         "document_symbols",
       },
       source_selector = {
+        winbar = true,
         sources = {
           { source = "filesystem" },
           { source = "buffers" },
           { source = "git_status" },
-          { source = "document_symbols" },
+          -- { source = "document_symbols" },
         },
       },
       window = {
