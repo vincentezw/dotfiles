@@ -63,13 +63,18 @@ return {
     vim.api.nvim_command("highlight LualineGreyText guifg=#a9a9a9 ctermfg=248")
     vim.api.nvim_command("highlight LualineRedText guifg=#cd1e1e ctermfg=248")
 
+    local theme = require("lualine.themes.auto")
+    theme.command.a.bg = "#a4c7ff"
+
     -- configure lualine with modified theme
     lualine.setup({
       options = {
         disabled_filetypes = { "lazy", "neo-tree" },
-        theme = "oxocarbon",
+        theme = "auto",
         component_separators = "",
         section_separators = "",
+        -- a global background fixes our bug but we lose mode colours :(
+        -- color = { bg = "#000000" },
       },
       sections = {
         lualine_a = {
@@ -85,6 +90,7 @@ return {
             "branch",
             icon = { "", color = { fg = "#CE27BD" } },
             padding = { left = 2, right = 3 },
+            color = { bg = nil },
           },
         },
         lualine_c = {
@@ -116,6 +122,15 @@ return {
             icon = { "", color = { fg = "#CE27BD" } },
             padding = { left = 2 },
           },
+          -- {
+          --   "searchcount",
+          --   icon = { "", color = { fg = "#CE27BD" } },
+          --   fmt = function(name, context)
+          --     local bracket_open = "%#LualineGreyText#(%#Normal#"
+          --     local bracket_close = "%#LualineGreyText#)%#Normal#"
+          --     return string.format("%s%s%s", bracket_open, name, bracket_close)
+          --   end,
+          -- },
         },
         lualine_x = {
           {

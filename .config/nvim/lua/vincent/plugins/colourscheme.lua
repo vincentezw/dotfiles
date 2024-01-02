@@ -5,25 +5,24 @@ return {
     config = function()
       vim.opt.background = "dark" -- set this to dark or light
       vim.cmd("colorscheme oxocarbon")
-      -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#CE27BD" })
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#CE27BD" })
+      vim.api.nvim_exec(
+        [[
+          hi lualine_a_command guifg=#CE27BD guibg=#141313
+          hi TelescopePromptBorder guifg=#CE27BD guibg=#141313
+          hi TelescopePrompt guifg=#CE27BD 
+          hi TelescopePromptNormal guibg=#141313
+          hi TelescopePromptPrefix guibg=#141313
+          hi TelescopePromptTitle guifg=#141313 guibg=#CE27BD
+          hi TelescopePreviewTitle guifg=#141313 guibg=#CE27BD
+          hi TelescopeResultsTitle guifg=#141313 guibg=#CE27BD
+        ]],
+        false
+      )
+      -- vim.cmd([[ hi NormalFloat guibg= #f7ff00 ctermbg=235 ]])
     end,
   },
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   config = function()
-  --     require("onedark").setup({
-  --       commentStyle = "italic",
-  --       keywordStyle = "italic",
-  --       functionStyle = "italic",
-  --       variableStyle = "italic",
-  --       transparent = true,
-  --       sidebars = { "qf", "vista_kind", "terminal", "packer" },
-  --     })
-  --     -- loadhi the colorscheme here
-  --     -- vim.cmd([[colorscheme onedark]])
-  --   end,
-  -- },
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",
@@ -67,7 +66,7 @@ return {
   --       },
   --     })
   --     -- loadhi the colorscheme here
-  --     vim.cmd([[colorscheme catppuccin-frappe]])
+  --     vim.cmd([[colorscheme catppuccin-mocha]])
   --   end,
   -- },
 }
