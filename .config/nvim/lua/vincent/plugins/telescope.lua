@@ -4,7 +4,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "nvim-tree/nvim-web-devicons",
+    "DaikyXendo/nvim-material-icon",
   },
   config = function()
     local telescope = require("telescope")
@@ -20,6 +20,11 @@ return {
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
+        layout_config = {
+          prompt_position = "top",
+        },
+        prompt_prefix = " ",
+        dynamic_preview_title = true,
       },
     })
 

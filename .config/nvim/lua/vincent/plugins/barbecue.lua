@@ -4,16 +4,26 @@ return {
   version = "*",
   dependencies = {
     "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
+    -- "nvim-tree/nvim-web-devicons", -- optional dependency
+    "DaikyXendo/nvim-material-icon",
   },
   opts = {
-    theme = "monokai-pro", -- configurations go here
+    theme = "auto", -- configurations go here
   },
   config = function()
     vim.opt.updatetime = 200
+    vim.api.nvim_command("highlight BarbecueGreenText guifg=#69C8C8 ctermfg=248")
 
     require("barbecue").setup({
       create_autocmd = false, -- prevent barbecue from updating itself automatically
+      exclude_filetypes = { "neo-tree", "goto-preview" },
+      show_basename = false,
+      symbols = {
+        separator = "%#BarbecueGreenText#%#Normal#",
+      },
+      lead_custom_section = function()
+        return "%#BarbecueGreenText#󰈙 %#Normal#Document root %#BarbecueGreenText#%#Normal# "
+      end,
     })
 
     vim.api.nvim_create_autocmd({
