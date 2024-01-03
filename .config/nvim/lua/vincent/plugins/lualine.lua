@@ -63,9 +63,6 @@ return {
     vim.api.nvim_command("highlight LualineGreyText guifg=#a9a9a9 ctermfg=248")
     vim.api.nvim_command("highlight LualineRedText guifg=#cd1e1e ctermfg=248")
 
-    local theme = require("lualine.themes.auto")
-    theme.command.a.bg = "#a4c7ff"
-
     -- configure lualine with modified theme
     lualine.setup({
       options = {
@@ -73,8 +70,7 @@ return {
         theme = "auto",
         component_separators = "",
         section_separators = "",
-        -- a global background fixes our bug but we lose mode colours :(
-        -- color = { bg = "#000000" },
+        color = { bg = nil },
       },
       sections = {
         lualine_a = {
@@ -122,15 +118,28 @@ return {
             icon = { "", color = { fg = "#CE27BD" } },
             padding = { left = 2 },
           },
-          -- {
-          --   "searchcount",
-          --   icon = { "", color = { fg = "#CE27BD" } },
-          --   fmt = function(name, context)
-          --     local bracket_open = "%#LualineGreyText#(%#Normal#"
-          --     local bracket_close = "%#LualineGreyText#)%#Normal#"
-          --     return string.format("%s%s%s", bracket_open, name, bracket_close)
-          --   end,
-          -- },
+          {
+            "searchcount",
+            icon = { "", color = { fg = "#06a4c7" } },
+            fmt = function(name, context)
+              if vim.v.hlsearch > 0 then
+                local cleaned_name = string.gsub(name, "[%[%]]", "")
+                return " " .. cleaned_name
+              end
+            end,
+            padding = { left = 3 },
+          },
+          {
+            "selectioncount",
+            icon = { "󰒅", color = { fg = "#06a4c7" } },
+            fmt = function(name, context)
+              if name ~= "" then
+                local cleaned_name = string.gsub(name, "[%[%]]", "")
+                return " " .. cleaned_name
+              end
+            end,
+            padding = { left = 3 },
+          },
         },
         lualine_x = {
           {
@@ -156,7 +165,7 @@ return {
         },
         lualine_y = {
           {
-            "", -- Custom empty component as separator
+            " ", -- Custom empty component as separator
             draw_empty = true,
           },
           {
@@ -170,6 +179,8 @@ return {
           {
             "", -- Custom empty component as separator
             draw_empty = true,
+            color = { bg = "#171616" },
+            padding = 0,
           },
           {
             "location",

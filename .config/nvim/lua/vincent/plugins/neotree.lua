@@ -14,7 +14,7 @@ return {
       return
     end
     neo_tree.setup({
-      popup_border_style = "solid",
+      popup_border_style = "single",
       -- closes neotree automatically when it's the last **WINDOW** in the view
       auto_close = true,
       open_on_setup = false,
@@ -37,6 +37,8 @@ return {
       },
       source_selector = {
         winbar = true,
+        content_layout = "center",
+        separator = "",
         sources = {
           { source = "filesystem" },
           { source = "buffers" },
