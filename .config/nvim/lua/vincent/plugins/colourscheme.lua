@@ -5,22 +5,24 @@ return {
     config = function()
       vim.opt.background = "dark" -- set this to dark or light
       vim.cmd("colorscheme oxocarbon")
-      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#CE27BD" })
-      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#CE27BD" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#6ACBCB" })
+      vim.api.nvim_command([[highlight GotoPreviewTitle  guifg=#141313 guibg=#6ACBCB]])
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#6ACBCB" })
       vim.api.nvim_exec(
         [[
-          hi lualine_a_command guifg=#CE27BD guibg=#141313
-          hi TelescopePromptBorder guifg=#CE27BD guibg=#141313
-          hi TelescopePrompt guifg=#CE27BD 
+          hi BufferCurrent gui=italic
+          hi BufferCurrentMod gui=italic guifg=#ff9e64
+          hi NeoTreeTabActive gui=italic guifg=#ff9e64
+          hi TelescopePromptBorder guifg=#6ACBCB guibg=#141313
+          hi TelescopePrompt guifg=#6ACBCB 
           hi TelescopePromptNormal guibg=#141313
           hi TelescopePromptPrefix guibg=#141313
-          hi TelescopePromptTitle guifg=#141313 guibg=#CE27BD
-          hi TelescopePreviewTitle guifg=#141313 guibg=#CE27BD
-          hi TelescopeResultsTitle guifg=#141313 guibg=#CE27BD
+          hi TelescopePromptTitle guifg=#141313 guibg=#6ACBC4
+          hi TelescopePreviewTitle guifg=#141313 guibg=#6ACBCB
+          hi TelescopeResultsTitle guifg=#141313 guibg=#6ACBCB
         ]],
         false
       )
-      -- vim.cmd([[ hi NormalFloat guibg= #f7ff00 ctermbg=235 ]])
     end,
   },
   -- {

@@ -18,11 +18,12 @@ return {
       create_autocmd = false, -- prevent barbecue from updating itself automatically
       exclude_filetypes = { "neo-tree", "goto-preview" },
       show_basename = false,
+      show_dirname = false,
       symbols = {
         separator = "%#BarbecueGreenText#%#Normal#",
       },
       lead_custom_section = function()
-        return "%#BarbecueGreenText#󰈙 %#Normal#Document root %#BarbecueGreenText#%#Normal# "
+        return "%#BarbecueGreenText#󰈙 %#Normal#root %#BarbecueGreenText#%#Normal# "
       end,
     })
 

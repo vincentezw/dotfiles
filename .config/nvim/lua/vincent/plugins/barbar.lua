@@ -47,6 +47,11 @@ return {
   end,
   opts = {
     animation = true,
+    icons = {
+      separator_at_end = true,
+      preset = "slanted",
+      modified = { button = "󰏫" },
+    },
     sidebar_filetypes = {
       ["neo-tree"] = { event = "BufWipeout" },
     },
