@@ -36,7 +36,8 @@ return {
         "document_symbols",
       },
       source_selector = {
-        winbar = true,
+        -- winbar = true,
+        statusline = true,
         content_layout = "center",
         separator = "",
         sources = {

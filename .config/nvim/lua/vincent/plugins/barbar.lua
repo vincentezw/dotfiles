@@ -14,10 +14,10 @@ return {
           silent! BufferClose!
         elseif !a:force && buffer_count >= 1
           silent! BufferClose
-        elseif a:force && buffer_count == 0 
+        elseif a:force && buffer_count < 1 
           Neotree close
           quit!
-        elseif !aforce && buffer_count == 0
+        elseif !a:force && buffer_count < 1
           if !&modified
             Neotree close
           endif
