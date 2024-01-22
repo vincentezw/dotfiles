@@ -1,6 +1,5 @@
 #!/bin/bash
 mkdir -p ~/.config
-ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 
@@ -21,6 +20,7 @@ fi
 
 if [ -n "$SPIN" ]; then
   sh ${HOME}/dotfiles/starship.sh -f
-  sh ${HOME}/dotfiles/oh-my-zsh.sh -f
+  sh ${HOME}/dotfiles/oh-my-zsh.sh --unattended --keep-zshrc
 fi
 
+ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
