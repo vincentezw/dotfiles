@@ -1,8 +1,15 @@
 #!/bin/bash
-curl -sS https://starship.rs/install.sh | sh
 mkdir -p ~/.config
 ln -s ~/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
+
+if [ -z "$SPIN" ]; then
+  sh ${HOME}/dotfiles/starship.sh -f
+  sh ${HOME}/dotfiles/oh-my-zsh.sh -f
+else
+  curl -sS https://starship.rs/install.sh | sh -s -- -f
+fi
+
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 
 # Install Neovim plugins
@@ -10,8 +17,7 @@ gem install neovim
 npm install -g neovim
 
 if [ -n "$SPIN" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  apt_packages=("exa" "fonts-firacode")  # Add your list of packages
+  apt_packages=("exa" "fonts-firacode" "fzf")  # Add your list of packages
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
