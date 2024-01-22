@@ -1,23 +1,51 @@
+#!/bin/bash
+curl -sS https://starship.rs/install.sh | sh
 mkdir -p ~/.config
-echo "source ~/dotfiles/alias.zsh" >> ${HOME}/.zshrc
+ln -s ~/dotfiles/.zshrc ${HOME}/.zshrc
+ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
+ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
+
+# Install Neovim plugins
 gem install neovim
 npm install -g neovim
+
 if [ -n "$SPIN" ]; then
-  ln -sf "${HOME}/gitstatusd-linux-x86_64" "${HOME}/.cache/gitstatus/gitstatusd-linux-x86_64"
-  ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
-  if ! dpkg -l | grep -q fonts-firacode; then
-    sudo apt-get install -y fonts-firacode
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  apt_packages=("exa" "fonts-firacode")  # Add your list of packages
+  for package in "${apt_packages[@]}"; do
+    if ! dpkg -l | grep -q "$package"; then
+      sudo apt-get install -y "$package"
+    else
+      echo "$package is already installed."
+    fi
+  done
+fi
+
+# Check if on macOS
+if [[ $(uname) == "Darwin" ]]; then
+  # Check if Homebrew is installed
+  if ! command -v brew &> /dev/null; then
+    echo "Homebrew is not installed. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-  echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-  ln -sf "${HOME}/dotfiles/p10k.zsh" "${HOME}/.p10k.zsh"
+  brew tap homebrew/cask-fonts
 
-  if [ -f "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    echo 'source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
-  fi
-  if [ -f "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    echo 'source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc
-  fi
-  echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
+  # Install packages using Homebrew
+  brew_packages=(
+    "fzf"
+    "font-victor-mono-nerd-font"
+    "exa"
+    "zsh-autosuggestions"
+    "zsh-syntax-highlighting"
+  )
+  for package in "${brew_packages[@]}"; do
+    if ! brew list "$package" &> /dev/null; then
+      echo "Installing $package..."
+      brew install "$package"
+    else
+      echo "$package is already installed."
+    fi
+  done
+  $(brew --prefix)/opt/fzf/install
 fi
