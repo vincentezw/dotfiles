@@ -34,17 +34,16 @@ return {
       ["nt"] = "NORMAL",
       ["v"] = " Visual",
       ["vs"] = " Visual",
-      ["V"] = "V-LINE",
-      ["Vs"] = "V-LINE",
-      ["�"] = "V-BLOCK",
-      ["�s"] = "V-BLOCK",
+      ["V"] = " Visual line",
+      ["Vs"] = " Visual line",
+      ["\22"] = " Visual block",
       ["s"] = "SELECT",
       ["S"] = "S-LINE",
       ["�"] = "S-BLOCK",
       ["i"] = "󰏫 Insert",
       ["ic"] = "󰏫 Insert",
       ["ix"] = "󰏫 Insert",
-      ["R"] = "REPLACE",
+      ["R"] = " Replace",
       ["Rc"] = "REPLACE",
       ["Rx"] = "REPLACE",
       ["Rv"] = "V-REPLACE",
@@ -53,7 +52,7 @@ return {
       ["c"] = "󰘳 Command",
       ["cv"] = "EX",
       ["ce"] = "EX",
-      ["r"] = "REPLACE",
+      ["r"] = " Replace",
       ["rm"] = "MORE",
       ["r?"] = "CONFIRM",
       ["!"] = "SHELL",
@@ -76,7 +75,7 @@ return {
         lualine_a = {
           {
             function()
-              return mode_map[vim.api.nvim_get_mode().mode] or "__"
+              return mode_map[vim.api.nvim_get_mode().mode]
             end,
             separator = { left = " ", right = "" },
           },
