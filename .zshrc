@@ -1,11 +1,6 @@
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# # Initialization code that may require console input (password prompts, [y/n]
-# # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
 alias ls="exa --long --header --icons --git"
 alias vim="nvim"
+alias vi="nvim"
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -25,6 +20,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 base_paths=(
+  "/opt/homebrew/share"
   "/usr/local/share"
   "/usr/share"
 )
@@ -49,3 +45,14 @@ if [[ -d "$HOME/.rbenv/bin" ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ -d "/opt/dev/bin" ]]; then
+  export PATH="/opt/dev/bin:$PATH"
+fi
+
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
