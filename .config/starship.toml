@@ -18,6 +18,7 @@ $ruby\
 $nodejs"""
 
 continuation_prompt = ' '
+command_timeout = 800
 palette = 'gruvbox_dark'
 
 [palettes.gruvbox_dark]
