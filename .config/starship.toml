@@ -97,7 +97,8 @@ RedHatEnterprise = "󱄛"
 [hostname]
 style = "bg:color_blue fg:color_fg2"
 ssh_only = false
-format = '[ $hostname ]($style)'
+ssh_symbol = "󰌘"
+format = '[ $hostname $ssh_symbol ]($style)'
 disabled = false
 
 [directory]
