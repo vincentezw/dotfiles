@@ -1,4 +1,3 @@
-alias ls="exa --long --header --icons --git"
 alias vim="nvim"
 alias vi="nvim"
 
@@ -59,3 +58,4 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+alias ls="exa --long --header --icons --git"
