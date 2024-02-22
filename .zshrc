@@ -22,6 +22,7 @@ base_paths=(
   "/opt/homebrew/share"
   "/usr/local/share"
   "/usr/share"
+  "/usr/share/zsh/plugins"
 )
 
 command_paths=(
