@@ -27,5 +27,6 @@ if [ -n "$SPIN" ]; then
 fi
 
 ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
+ln -sf ~/dotfiles/.wezterm.lua ${HOME}/.wezterm.lua
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

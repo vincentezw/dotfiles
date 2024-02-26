@@ -6,6 +6,9 @@ return {
     vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
 
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+    vim.o.foldcolumn = '1'
+
     require("ufo").setup({
       -- provider_selector = function(bufnr, filetype, buftype)
       --   return {'treesitter', 'indent'}

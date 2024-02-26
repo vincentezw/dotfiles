@@ -161,9 +161,21 @@ return {
       },
     })
 
-    lspconfig["sorbet"].setup({})
-    lspconfig["solargraph"].setup({})
-    lspconfig["gopls"].setup({})
-    lspconfig["rust_analyzer"].setup({})
+    lspconfig["sorbet"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+    lspconfig["solargraph"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+    lspconfig["gopls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+    lspconfig["rust_analyzer"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
   end,
 }
