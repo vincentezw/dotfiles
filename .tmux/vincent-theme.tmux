@@ -97,7 +97,11 @@ main() {
   local left_column=$show_session$show_window
   # We set the sections
   set status-left "$left_column"
-  set status-right "$weather$show_music$show_date_time"
+  if [ -n "$SSH_CONNECTION" ]; then
+    set status-right "#[fg=$thm_overlay] ssh"
+  else
+    set status-right "$weather$show_music$show_date_time"
+  fi
   setw window-status-separator "  "
 
   # NOTE: Dont remove this, it can be useful for references
