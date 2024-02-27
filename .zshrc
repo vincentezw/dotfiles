@@ -59,4 +59,8 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-alias ls="exa --long --header --icons --git"
+if [ -n "$SPIN" ]; then
+  alias ls="exa --long --header --icons"
+else
+  alias ls="exa --long --header --icons --git"
+fi

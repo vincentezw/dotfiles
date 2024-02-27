@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local fonts = { "VictorMono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
-local font_size = 14.0
+local font_size = 15.0
 local theme = {
   background = "#161616",
   foreground = "#f4f4f4",
