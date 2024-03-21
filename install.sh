@@ -6,11 +6,11 @@ ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
 
-# Install Neovim plugins
-sudo gem install neovim
-
 if [ -n "$SPIN" ]; then
-  apt_packages=("exa" "tmux" "fzf")  # Add your list of packages
+  sudo add-apt-repository -y ppa:neovim-ppa/unstable
+  sudo apt-get update
+
+  apt_packages=("exa" "tmux" "fzf" "neovim")  # Add your list of packages
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
@@ -26,15 +26,17 @@ if [ -n "$SPIN" ]; then
 
   gem_user_install_dir=$(gem environment | grep -oP 'USER INSTALLATION DIRECTORY: \K.*')
   gem_bin_path="$gem_user_install_dir/bin"
-  gem install --user neovim
+  gem install --user neovim ruby-lsp
 
   if [ -d "$gem_bin_path" ]; then
     echo "export PATH=\"$gem_bin_path:\$PATH\"" >> ~/.zshrc
     echo "Gem bin path added to PATH."
   fi
 else
-  npm install -g neovim
+  # npm install -g neovim
+  sudo gem install neovim
 fi
+npm install -g neovim
 
 ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf ~/dotfiles/.wezterm.lua ${HOME}/.wezterm.lua

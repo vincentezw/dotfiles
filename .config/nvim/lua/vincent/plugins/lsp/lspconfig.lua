@@ -8,6 +8,43 @@ return {
   config = function()
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
+    -- Shopify's ruby lsp
+    local configs = require 'lspconfig.configs'
+    local util = require 'lspconfig/util'
+
+    if not configs.ruby_lsp then
+      local enabled_features = {
+        "documentHighlights",
+        "documentSymbols",
+        "foldingRanges",
+        "selectionRanges",
+        "formatting",
+        "codeActions",
+      }
+
+      configs.ruby_lsp = {
+        default_config = {
+          cmd = { "ruby-lsp" },
+          filetypes = { "ruby" },
+          root_dir = util.root_pattern("Gemfile", ".git"),
+          init_options = {
+            enabledFeatures = enabled_features,
+          },
+          settings = {},
+        },
+        commands = {
+          FormatRuby = {
+            function()
+              vim.lsp.buf.format({
+                name = "ruby_lsp",
+                async = true,
+              })
+            end,
+            description = "Format using ruby-lsp",
+          },
+        },
+      }
+    end
 
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -72,6 +109,11 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
+
+    lspconfig["ruby_lsp"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
 
     -- configure html server
     lspconfig["html"].setup({
@@ -165,10 +207,10 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     })
-    lspconfig["solargraph"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["solargraph"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
     lspconfig["gopls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
