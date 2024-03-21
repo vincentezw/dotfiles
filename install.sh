@@ -8,7 +8,6 @@ ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.t
 
 # Install Neovim plugins
 sudo gem install neovim
-npm install -g neovim
 
 if [ -n "$SPIN" ]; then
   apt_packages=("exa" "tmux" "fzf")  # Add your list of packages
@@ -24,6 +23,17 @@ fi
 if [ -n "$SPIN" ]; then
   sh ${HOME}/dotfiles/starship.sh -f
   sh ${HOME}/dotfiles/oh-my-zsh.sh --unattended --keep-zshrc
+
+  gem_user_install_dir=$(gem environment | grep -oP 'USER INSTALLATION DIRECTORY: \K.*')
+  gem_bin_path="$gem_user_install_dir/bin"
+  gem install --user neovim
+
+  if [ -d "$gem_bin_path" ]; then
+    echo "export PATH=\"$gem_bin_path:\$PATH\"" >> ~/.zshrc
+    echo "Gem bin path added to PATH."
+  fi
+else
+  npm install -g neovim
 fi
 
 ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
