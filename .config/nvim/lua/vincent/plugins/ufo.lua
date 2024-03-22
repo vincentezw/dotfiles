@@ -21,11 +21,8 @@ return {
         local builtin = require("statuscol.builtin")
         require("statuscol").setup({
           relculright = true,
+          ft_ignore = { "neo-tree", "TelescopePrompt" },
           segments = {
-            -- {
-            --   sign = { namespace = { "gitsign" }, colwidth = 1, wrap = true },
-            --   click = "v:lua.ScSa"
-            -- },
             {
               text = { builtin.foldfunc },
               colwidth = 2,
