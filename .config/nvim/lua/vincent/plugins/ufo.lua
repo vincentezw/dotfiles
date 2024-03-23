@@ -21,7 +21,17 @@ return {
         local builtin = require("statuscol.builtin")
         require("statuscol").setup({
           relculright = true,
-          ft_ignore = { "neo-tree", "TelescopePrompt" },
+          ft_ignore = {
+            "nofile",
+            "neo-tree",
+            "TelescopePrompt",
+            "TelescopeResults",
+            "help",
+            "dashboard",
+            "NvimTree",
+            "lazy",
+            "toggleterm",
+          },
           segments = {
             {
               text = { builtin.foldfunc },
