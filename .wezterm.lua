@@ -15,6 +15,7 @@ local theme = {
     "#B5A075",
   },
   panel = {
+    -- This is the active tab??
     background = "#262626",
     foreground = "#f4f4f4",
   },
@@ -23,8 +24,9 @@ local theme = {
     foreground = "#ff9e64",
   },
   tab_inactive = {
+    -- Is this used?
     background = "#1a1a1a",
-    foreground = "#f4f4f4",
+    foreground = "#9e9e9e",
   },
 }
 
@@ -58,6 +60,12 @@ wezterm.on(
         { Foreground = { Color = theme.tab_active.background } },
         { Text = tab_edge_right },
       }
+    else
+      return {
+        { Background = { Color = theme.panel.background } },
+        { Foreground = { Color = theme.tab_inactive.foreground } },
+        { Text = ' ' .. tab.tab_index .. ': ' .. title .. ' ' },
+      }
     end
   end
 )
@@ -78,13 +86,28 @@ return {
 
   colors = {
     background = theme.background,
+    tab_bar = {
+      background = theme.panel.background,
+    },
+  },
+
+  tab_bar_style = {
+    new_tab = wezterm.format {
+      { Foreground = { Color = theme.foreground } },
+      { Background = { Color = theme.panel.background } },
+      { Text = " 󰐕 " },
+    },
+    new_tab_hover = wezterm.format {
+      { Foreground = { Color = "#CE27BD" } },
+      { Background = { Color = theme.panel.background } },
+      { Text = " 󰐕 " },
+    },
+
   },
 
   window_frame = {
     font = wezterm.font_with_fallback(fonts),
     font_size = font_size,
-    active_titlebar_bg = theme.panel.background,
-    inactive_titlebar_bg = theme.background,
   },
   window_padding = {
     left = 10, right = 3,
