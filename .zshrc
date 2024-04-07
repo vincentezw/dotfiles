@@ -39,9 +39,8 @@ for base_path in $base_paths; do
   done
 done
 
-if [[ -d "$HOME/.rbenv/bin" ]]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init - zsh)"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -56,8 +55,6 @@ fi
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 if [ -n "$SPIN" ]; then
   alias ls="exa --long --header --icons"

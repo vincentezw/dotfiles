@@ -64,7 +64,7 @@ wezterm.on(
       return {
         { Background = { Color = theme.panel.background } },
         { Foreground = { Color = theme.tab_inactive.foreground } },
-        { Text = ' ' .. tab.tab_index .. ': ' .. title .. ' ' },
+        { Text = ' ' .. tab.tab_index+1 .. ': ' .. title .. ' ' },
       }
     end
   end

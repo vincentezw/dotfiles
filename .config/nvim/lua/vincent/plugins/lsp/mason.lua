@@ -39,7 +39,6 @@ return {
         "pyright",
         "gopls",
         "rust_analyzer",
-        "solargraph",
         "sorbet",
       },
       -- auto-install configured servers (with lspconfig)

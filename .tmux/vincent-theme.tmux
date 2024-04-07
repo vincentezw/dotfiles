@@ -98,7 +98,7 @@ main() {
   # We set the sections
   set status-left "$left_column"
   if [ -n "$SSH_CONNECTION" ]; then
-    set status-right "#[fg=$thm_overlay] ssh"
+    set status-right "$weather$show_date_time#[fg=$thm_overlay] ssh"
   else
     set status-right "$weather$show_music$show_date_time"
   fi

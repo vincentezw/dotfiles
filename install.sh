@@ -10,7 +10,7 @@ if [ -n "$SPIN" ]; then
   sudo add-apt-repository -y ppa:neovim-ppa/unstable
   sudo apt-get update
 
-  apt_packages=("exa" "tmux" "fzf" "neovim")  # Add your list of packages
+  apt_packages=("exa" "tmux" "fzf" "neovim")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
@@ -19,6 +19,8 @@ if [ -n "$SPIN" ]; then
     fi
   done
 fi
+
+ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
 
 if [ -n "$SPIN" ]; then
   sh ${HOME}/dotfiles/starship.sh -f
@@ -33,12 +35,10 @@ if [ -n "$SPIN" ]; then
     echo "Gem bin path added to PATH."
   fi
 else
-  # npm install -g neovim
   sudo gem install neovim
 fi
 npm install -g neovim
 
-ln -sf ~/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf ~/dotfiles/.wezterm.lua ${HOME}/.wezterm.lua
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

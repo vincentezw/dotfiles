@@ -5,11 +5,15 @@ return {
     vim.opt.foldlevel = 99
     vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
-    
+    local ftMap = {
+      vim = 'indent',
+      python = {'indent'},
+      git = ''
+    }
     require("ufo").setup({
-      -- provider_selector = function(bufnr, filetype, buftype)
-      --   return {'treesitter', 'indent'}
-      -- end,
+      provider_selector = function(bufnr, filetype, buftype)
+        return ftMap[filetype]
+      end,
     })
   end,
   dependencies = {
