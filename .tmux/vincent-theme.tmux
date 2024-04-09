@@ -87,7 +87,7 @@ main() {
   local readonly show_window_in_window_status_current="$spacer #[fg=$thm_love]󰶭  #[fg=$thm_overlay]#I#[fg=$thm_overlay,bg=""]$left_separator#[fg=$thm_overlay,bg=""]#W"
   local readonly show_session="#[fg=$thm_love]  #[fg=$thm_overlay]#S "
   local readonly show_date_time="$spacer #[fg=$colour_bubble] #[bg=$colour_bubble fg=$thm_love] 󰥔  $spacer#[fg=$colour_bubble_text]$date $spacer $time $spacer#[bg=$colour_bg fg=$colour_bubble] $spacer"
-  local show_music="$spacer #[fg=$colour_bubble] #[bg=$colour_bubble fg=$thm_love] 󰎆 #[fg=$colour_bubble_text]#{music_status} #{artist}: #{track} $spacer#[bg=$colour_bg fg=$colour_bubble]$spacer"
+  local show_music="$spacer #[fg=$colour_bubble] #[bg=$colour_bubble fg=$thm_love] 󰎆 #[fg=$colour_bubble_text] #{now_playing} $spacer#[bg=$colour_bg fg=$colour_bubble]$spacer"
   local weather="#[fg=$colour_bubble]#[bg=$colour_bubble fg=$colour_bubble_text] #{weather} #[bg=$colour_bg fg=$colour_bubble]$spacer "
   window_status_format=$show_window_in_window_status
   window_status_current_format=$show_window_in_window_status_current
@@ -98,7 +98,7 @@ main() {
   # We set the sections
   set status-left "$left_column"
   if [ -n "$SSH_CONNECTION" ]; then
-    set status-right "$weather$show_date_time#[fg=$thm_overlay] ssh"
+    set status-right "$weather$show_music$show_date_time#[fg=$thm_overlay] ssh"
   else
     set status-right "$weather$show_music$show_date_time"
   fi
