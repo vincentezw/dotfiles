@@ -7,10 +7,9 @@ ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
 
 if [ -n "$SPIN" ]; then
-  sudo add-apt-repository -y ppa:neovim-ppa/unstable
-  sudo apt-get update
-
-  apt_packages=("exa" "tmux" "fzf" "neovim")
+  # sudo add-apt-repository -y ppa:neovim-ppa/unstable
+  # sudo apt-get update
+  apt_packages=("exa" "tmux" "fzf")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"

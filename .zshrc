@@ -58,7 +58,6 @@ fi
 
 if [ -n "$SPIN" ]; then
   alias ls="exa --long --header --icons"
-  alias nvim="/usr/bin/nvim"
 else
   alias ls="exa --long --header --icons --git"
 fi
