@@ -58,6 +58,12 @@ fi
 
 if [ -n "$SPIN" ]; then
   alias ls="exa --long --header --icons"
+  alias nvim="/usr/bin/nvim"
 else
   alias ls="exa --long --header --icons --git"
 fi
+
+# Shopify Hydrogen alias to local projects
+alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/vincent/.kube/config:/Users/vincent/.kube/config.shopify.cloudplatform
