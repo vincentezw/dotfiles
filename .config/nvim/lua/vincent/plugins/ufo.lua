@@ -25,6 +25,7 @@ return {
         local builtin = require("statuscol.builtin")
         require("statuscol").setup({
           relculright = true,
+          bt_ignore = { "nofile", "prompt" },
           ft_ignore = {
             "nofile",
             "neo-tree",
@@ -32,7 +33,6 @@ return {
             "TelescopeResults",
             "help",
             "dashboard",
-            "NvimTree",
             "lazy",
             "toggleterm",
           },

@@ -110,7 +110,7 @@ return {
     font_size = font_size,
   },
   window_padding = {
-    left = 10, right = 3,
+    left = 8, right = 3,
     top = 3, bottom = 0,
   },
 }
