@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local fonts = { "VictorMono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
-local font_size = 15.0
+local font_size = 12.0
 local theme = {
   background = "#161616",
   foreground = "#f4f4f4",
@@ -72,9 +72,10 @@ wezterm.on(
 
 
 return {
-  front_end = "WebGpu",
-  webgpu_power_preference = "HighPerformance",
-  window_decorations = "RESIZE",
+  front_end = "OpenGL",
+  -- webgpu_power_preference = "HighPerformance",
+  enable_wayland = false,
+  -- window_decorations = "RESIZE",
   -- window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 
   font = wezterm.font_with_fallback(fonts),

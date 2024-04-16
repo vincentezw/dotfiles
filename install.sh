@@ -2,6 +2,7 @@
 mkdir -p ~/.config
 mkdir -p ~/.tmux/plugins
 ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
+ln -sf "${HOME}/dotfiles/.config/kitty" "${HOME}/.config/kitty"
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
