@@ -31,7 +31,7 @@ unset_option() {
 }
 
 main() {
-  colour_bg="#121212"        # Closest to base00_nvim
+  colour_bg="#161616"        # Closest to base00_nvim
   thm_surface="#1f1d2e"     # Closest to base01_nvim
   thm_muted="#6e6a86"       # Closest to base03_nvim
   thm_text="#e0def4"        # Closest to base04_nvim

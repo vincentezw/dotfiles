@@ -13,6 +13,7 @@ return {
           hi BufferCurrent gui=italic
           hi BufferCurrentMod gui=italic guifg=#ff9e64
           hi NeoTreeTabActive gui=italic
+          hi NeoTreeTabInactive guibg=#161616
           hi TelescopePromptBorder guifg=#6ACBCB guibg=#141313
           hi TelescopePrompt guifg=#6ACBCB 
           hi TelescopePromptNormal guibg=#141313
