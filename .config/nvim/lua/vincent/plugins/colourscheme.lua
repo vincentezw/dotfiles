@@ -10,8 +10,13 @@ return {
       vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#6ACBCB" })
       vim.api.nvim_exec(
         [[
-          hi BufferCurrent gui=italic
-          hi BufferCurrentMod gui=italic guifg=#ff9e64
+          hi BufferCurrent gui=italic guibg=#2E2E2E
+          hi BufferCurrentMod gui=italic guifg=#ff9e64 guibg=#2E2E2E
+          hi BufferCurrentSign guifg=#161616 guibg=#2E2E2E
+          hi BufferTabpageFill guibg=#161616
+          hi BufferInactive guibg=#161616
+          hi BufferInactiveSign guifg=#161616 guibg=#161616
+
           hi NeoTreeTabActive gui=italic
           hi NeoTreeTabInactive guibg=#161616
           hi TelescopePromptBorder guifg=#6ACBCB guibg=#141313
