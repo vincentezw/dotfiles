@@ -1,6 +1,9 @@
 alias vim="nvim"
 alias vi="nvim"
 
+alias ssh="kitty +kitten ssh"
+alias clipboard="kitty +kitten clipboard"
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
