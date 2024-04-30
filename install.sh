@@ -1,8 +1,14 @@
 #!/bin/bash
 mkdir -p ~/.config
 mkdir -p ~/.tmux/plugins
-ln -sf "${HOME}/dotfiles/.config/nvim" "${HOME}/.config/nvim"
-ln -sf "${HOME}/dotfiles/.config/kitty" "${HOME}/.config/kitty"
+
+source_dir="${HOME}/dotfiles/.config"
+target_dir="${HOME}/.config"
+subdirs=("nvim" "kitty" "hyper")
+
+for subdir in "${subdirs[@]}"; do
+  ln -sf "${source_dir}/${subdir}" "${target_dir}/${subdir}"
+done
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
