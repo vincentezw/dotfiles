@@ -43,8 +43,9 @@ if [ -n "$SPIN" ]; then
 else
   sudo gem install neovim
 fi
-npm install -g neovim
+npm install -g neovim nb.sh
 
 ln -sf ~/dotfiles/.wezterm.lua ${HOME}/.wezterm.lua
+sudo "$(which nb)" completions install
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

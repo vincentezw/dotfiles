@@ -16,6 +16,7 @@ if [[ $(uname) == "Darwin" ]]; then
     "fzf"
     "font-victor-mono-nerd-font"
     "exa"
+    "xwmx/taps/nb"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
   )
