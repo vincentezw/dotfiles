@@ -48,11 +48,6 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ -d "/opt/dev/bin" ]]; then
-  export PATH="/opt/dev/bin:$PATH"
-fi
-
-
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
@@ -65,7 +60,7 @@ else
   alias ls="exa --long --header --icons --git"
 fi
 
-# Shopify Hydrogen alias to local projects
-alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/vincent/.kube/config:/Users/vincent/.kube/config.shopify.cloudplatform
+if [[ -d "/opt/dev/bin" ]]; then
+  PATH="/opt/dev/bin:$PATH"
+fi
+export PATH="$HOME/.local/bin:$PATH"
