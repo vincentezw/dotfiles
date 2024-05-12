@@ -48,3 +48,6 @@ npm install -g neovim nb.sh
 sudo "$(which nb)" completions install
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/vincentezw/notes.git ~/.nb  
+
+${HOME}/dotfiles/nb-setup.hs

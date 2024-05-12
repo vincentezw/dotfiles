@@ -37,7 +37,7 @@ return {
         "emmet_ls",
         -- "prismals",
         "pyright",
-        "gopls",
+        -- "gopls",
         "rust_analyzer",
         "sorbet",
       },

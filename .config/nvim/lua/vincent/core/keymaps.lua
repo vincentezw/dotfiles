@@ -30,23 +30,3 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
-
-vim.api.nvim_create_user_command('NewNote', function()
-  local path = os.getenv("HOME") .. '/.nb/home/'
-  local datetime = os.date('%Y-%m-%d_%H-%M-%S')
-  local file = path .. datetime .. '.md'
-  vim.cmd('edit ' .. file)
-
-  vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = file,
-    callback = function()
-      vim.notify("Syncing with nb...", vim.log.levels.INFO)
-      vim.loop.spawn('nb', {'sync'}, {
-        on_exit = function(code, signal)
-          vim.notify("Sync complete!", vim.log.levels.INFO)
-        end
-      })
-    end,
-    once = true
-  })
-end, {})
