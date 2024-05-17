@@ -16,8 +16,8 @@ ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
 
 if [ -n "$SPIN" ]; then
-  # sudo add-apt-repository -y ppa:neovim-ppa/unstable
-  # sudo apt-get update
+  sudo add-apt-repository -y ppa:neovim-ppa/unstable
+  sudo apt-get update
   apt_packages=("exa" "tmux" "fzf")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
@@ -33,9 +33,9 @@ if [ -n "$SPIN" ]; then
   sh ${HOME}/dotfiles/starship.sh -f
   sh ${HOME}/dotfiles/oh-my-zsh.sh --unattended --keep-zshrc
 
-  gem_user_install_dir=$(gem environment | grep -oP 'USER INSTALLATION DIRECTORY: \K.*')
-  gem_bin_path="$gem_user_install_dir/bin"
-  gem install --user neovim ruby-lsp
+  # gem_user_install_dir=$(gem environment | grep -oP 'USER INSTALLATION DIRECTORY: \K.*')
+  # gem_bin_path="$gem_user_install_dir/bin"
+  # gem install --user neovim ruby-lsp
 
   if [ -d "$gem_bin_path" ]; then
     echo "export PATH=\"$gem_bin_path:\$PATH\"" >> ~/.zshrc
