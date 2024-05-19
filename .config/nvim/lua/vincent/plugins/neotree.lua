@@ -5,7 +5,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
-    "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    "3rd/image.nvim",
   },
   config = function()
     local status_ok, neo_tree = pcall(require, "neo-tree")
@@ -18,7 +18,7 @@ return {
       -- closes neotree automatically when it's the last **WINDOW** in the view
       auto_close = true,
       open_on_setup = false,
-      -- if true, the neotree will resize itself based on the number of entries
+      -- if {output: true}, the neotree will resize itself based on the number of entries
       -- if false, the neotree will always have a fixed width
       auto_resize = true,
       disable_on_buf_enter = false,
@@ -36,7 +36,6 @@ return {
         "document_symbols",
       },
       source_selector = {
-        -- winbar = true,
         statusline = true,
         content_layout = "center",
         separator = "",
@@ -44,22 +43,21 @@ return {
           { source = "filesystem" },
           { source = "buffers" },
           { source = "git_status" },
-          -- { source = "document_symbols" },
         },
       },
       window = {
         mappings = {
           ["e"] = function()
-            vim.api.nvim_exec("Neotree focus filesystem left", true)
+            vim.api.nvim_exec2("Neotree focus filesystem left", {output = true})
           end,
           ["b"] = function()
-            vim.api.nvim_exec("Neotree focus buffers left", true)
+            vim.api.nvim_exec2("Neotree focus buffers left", {output = true})
           end,
           ["g"] = function()
-            vim.api.nvim_exec("Neotree focus git_status left", true)
+            vim.api.nvim_exec2("Neotree focus git_status left", {output = true})
           end,
           ["s"] = function()
-            vim.api.nvim_exec("Neotree focus document_symbols left", true)
+            vim.api.nvim_exec2("Neotree focus document_symbols left", {output = true})
           end,
         },
       },
