@@ -16,8 +16,7 @@ ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
 
 if [ -n "$SPIN" ]; then
-  sudo add-apt-repository -y ppa:neovim-ppa/unstable
-  apt_packages=("exa" "tmux" "fzf" "neovim")
+  apt_packages=("exa" "tmux" "fzf")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
@@ -31,15 +30,17 @@ if [ -n "$SPIN" ]; then
 
   gem_user_install_dir=$(gem environment | grep -oP 'USER INSTALLATION DIRECTORY: \K.*')
   gem_bin_path="$gem_user_install_dir/bin"
-  # gem install --user neovim ruby-lsp
   gem install --user neovim
 
   if [ -d "$gem_bin_path" ]; then
-    echo "export PATH=\"$gem_bin_path:/usr/bin:\$PATH\"" >> ~/.zshrc
+    echo "export PATH=\"$gem_bin_path:\$PATH\"" >> ~/.zshrc
     echo "Gem bin path added to PATH."
-  else
-    echo "export PATH=\"/usr/bin:\$PATH\"" >> ~/.zshrc
   fi
+
+  NEOVIM_VERSION=0.10.0
+  wget -qO nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux64.tar.gz \
+    && sudo tar -C /usr/local --strip-components=1 -xf nvim-linux64.tar.gz \
+    && rm nvim-linux64.tar.gz
 else
   sudo gem install neovim
 fi
