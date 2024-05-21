@@ -13,7 +13,6 @@ ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
 ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
-ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
 
 if [ -n "$SPIN" ]; then
   apt_packages=("exa" "tmux" "fzf")
@@ -32,6 +31,8 @@ if [ -n "$SPIN" ]; then
   gem_bin_path="$gem_user_install_dir/bin"
   gem install --user neovim
 
+  echo "prefix=/home/spin/.local" >> ~/.npmrc
+
   if [ -d "$gem_bin_path" ]; then
     echo "export PATH=\"$gem_bin_path:\$PATH\"" >> ~/.zshrc
     echo "Gem bin path added to PATH."
@@ -43,10 +44,11 @@ if [ -n "$SPIN" ]; then
     && rm nvim-linux64.tar.gz
   nvim --headless "+Lazy! restore" +qa
 else
+  ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
   sudo gem install neovim
 fi
 npm install -g neovim nb.sh
-sudo "$(which nb)" completions install
+"$(which nb)" completions install
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
