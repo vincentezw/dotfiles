@@ -41,6 +41,7 @@ if [ -n "$SPIN" ]; then
   wget -qO nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux64.tar.gz \
     && sudo tar -C /usr/local --strip-components=1 -xf nvim-linux64.tar.gz \
     && rm nvim-linux64.tar.gz
+  nvim --headless "+Lazy! restore" +qa
 else
   sudo gem install neovim
 fi
