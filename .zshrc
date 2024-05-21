@@ -60,6 +60,11 @@ else
   alias ls="exa --long --header --icons --git"
 fi
 
+# step notes with nb.sh if it's not already set up
+if [ ! -d "$HOME/.nb" ]; then
+  # ${HOME}/dotfiles/nb-setup.sh
+fi
+
 if [[ -d "/opt/dev/bin" ]]; then
   PATH="/opt/dev/bin:$PATH"
 fi

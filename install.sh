@@ -48,8 +48,6 @@ else
   sudo gem install neovim
 fi
 npm install -g neovim nb.sh
-"$(which nb)" completions install
+[ -f $HOME/.local/bin/nb ] && $HOME/.local/bin/nb completions install
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-${HOME}/dotfiles/nb-setup.sh
