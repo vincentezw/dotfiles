@@ -53,6 +53,11 @@ return {
           },
         },
       })
+      -- python highlighting for starlark
+      vim.api.nvim_exec2([[
+        autocmd FileType starlark set syntax=python
+      ]], {output = false})
+
     end,
   },
 }

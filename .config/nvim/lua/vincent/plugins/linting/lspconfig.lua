@@ -109,14 +109,21 @@ return {
       'sorbet',
       'gopls',
       'rust_analyzer',
+      'starpls',
     }
 
     for _, lsp_server in pairs(lsp_servers) do
       local filetypes
+      local root_dir
       if lsp_server == 'graphql' then
         filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" }
       elseif lsp_server == 'ruby_lsp' then
         filetypes = { "ruby" }
+      elseif lsp_server == 'starpls' then
+        filetypes = { "starlark" }
+        root_dir = function(fname)
+          return util.path.dirname(fname)
+        end
       elseif lsp_server == 'emmet_ls' then
         filetypes = { "html", "svelte", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" }
       end
@@ -124,7 +131,8 @@ return {
       lspconfig[lsp_server].setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        filetypes = filetypes,
+        filetypes = filetypes or lspconfig[lsp_server].document_config.default_config.filetypes,
+        root_dir = root_dir or lspconfig[lsp_server].document_config.default_config.root_dir,
       })
     end
 
