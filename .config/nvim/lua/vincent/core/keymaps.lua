@@ -31,9 +31,9 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
-keymap.set('n', '<leader>cc', '<cmd>CopilotChatToggle<CR>', {noremap = true, silent = true, desc = '󰭹 Open chat'})
-keymap.set('n', '<leader>cr', '<cmd>CopilotChatReview<CR>', {noremap = true, silent = true, desc = '󰭹 Review selection'})
-keymap.set('n', '<leader>cf', '<cmd>CopilotChatFix<CR>', {noremap = true, silent = true, desc = '󰭹 Fix a problem in the selection'})
-keymap.set('n', '<leader>cf', '<cmd>CopilotChatFixDiagnostic<CR>', {noremap = true, silent = true, desc = '󰭹 Fix diagnostic'})
-keymap.set('n', '<leader>co', '<cmd>CopilotChatOptimize<CR>', {noremap = true, silent = true, desc = '󰭹 Optimize selection'})
-keymap.set('n', '<leader>cm', '<cmd>CopilotChatCommitStaged<CR>', {noremap = true, silent = true, desc = '󰭹 Write commit message'})
+keymap.set({'n', 'v'}, '<leader>cc', '<cmd>CopilotChatToggle<CR>', {noremap = true, silent = true, desc = '󰭹 Open chat'})
+keymap.set({'n', 'v'}, '<leader>cr', '<cmd>CopilotChatReview<CR>', {noremap = true, silent = true, desc = '󰭹 Review selection'})
+keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFix<CR>', {noremap = true, silent = true, desc = '󰭹 Fix a problem in the selection'})
+keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFixDiagnostic<CR>', {noremap = true, silent = true, desc = '󰭹 Fix diagnostic'})
+keymap.set({'n', 'v'}, '<leader>co', '<cmd>CopilotChatOptimize<CR>', {noremap = true, silent = true, desc = '󰭹 Optimize selection'})
+keymap.set({'n', 'v'}, '<leader>cm', '<cmd>CopilotChatCommitStaged<CR>', {noremap = true, silent = true, desc = '󰭹 Write commit message'})
