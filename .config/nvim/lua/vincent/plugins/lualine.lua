@@ -62,11 +62,44 @@ return {
     vim.api.nvim_command("highlight LualineGreyText guifg=#a9a9a9 ctermfg=248")
     vim.api.nvim_command("highlight LualineRedText guifg=#cd1e1e ctermfg=248")
 
+    local function deep_merge(t1, t2)
+      for k,v in pairs(t2) do
+        if type(v) == "table" and type(t1[k]) == "table" then
+          deep_merge(t1[k], v)
+        else
+          t1[k] = v
+        end
+      end
+      return t1
+    end
+
+    local cyberdream = require'lualine.themes.cyberdream'
+    local extended_cyberdream = {
+      normal = {
+        a = {fg = "#000000", bg = "#81A9F8" },
+      },
+      insert = {
+        a = {fg = "#000000", bg = "#d65a56" },
+      },
+      visual = {
+        a = {fg = "#000000", bg = "#9b78bf" },
+      },
+      replace = {
+        a = {fg = "#000000", bg = "#c46333" },
+      },
+      command = {
+        a = { fg = "#000000", bg = "#78bf7c" },
+      },
+      terminal = {
+        a = { fg = "#000000", bg = "#c261bf" },
+      },
+    }
+
     -- configure lualine with modified theme
     lualine.setup({
       options = {
         disabled_filetypes = { "lazy", "neo-tree" },
-        theme = "auto",
+        theme = deep_merge(cyberdream, extended_cyberdream),
         component_separators = "",
         section_separators = "",
         color = { bg = nil },
@@ -85,7 +118,7 @@ return {
             "branch",
             icon = { "", color = { fg = "#CE27BD" } },
             padding = { left = 2, right = 3 },
-            color = { bg = nil },
+            color = { bg = nil, fg = "#ffffff" },
           },
         },
         lualine_c = {

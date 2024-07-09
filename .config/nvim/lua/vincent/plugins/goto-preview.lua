@@ -5,15 +5,16 @@ return {
       default_mappings = true,
       -- border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" },
       border = { "󰁛", "─", "┐", "│", "┘", "─", "└", "│" },
-      opacity = 10,
+      opacity = 0,
       preview_window_title = { enable = true, position = "center" },
       post_open_hook = function(buffer, window)
+        -- Disable LSP for this buffer
+        vim.api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
         -- Override the highlight group for the title text
-        -- this used to target 'window' but I think it's fine
-        -- vim.api.nvim_win_set_option(window, "winhighlight", "Title:GotoPreviewTitle")
-        vim.api.nvim_set_option_value("winhighlight", "Title:GotoPreviewTitle", {})
-        -- vim.api.nvim_buf_set_keymap(buffer, 'n', '1', 'lua require("goto-preview").close_all_win()', {noremap = true, silent = true})
-        vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', ':bd<CR>', {noremap = true, silent = true})
+        vim.api.nvim_set_option_value("winhighlight", "FloatTitle:GotoPreviewTitle", {win = window})
+        vim.keymap.set('n', 'q', function()
+          require('goto-preview').close_all_win()
+        end, { buffer = true, remap = true })
       end,
     })
   end,

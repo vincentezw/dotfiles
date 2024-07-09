@@ -29,6 +29,15 @@ return {
           vim.b.copilot_suggestion_hidden = false
         end)
       end
+
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = 'copilot-*',
+        callback = function()
+          local window = vim.api.nvim_get_current_win()
+          vim.api.nvim_set_option_value("winhighlight", "FloatTitle:GotoPreviewTitle", {win = window})
+          vim.api.nvim_win_set_config(window, {title = 'Copilot Chat', title_pos = 'center'})
+        end
+      })
     end,
   },
   {
@@ -69,7 +78,9 @@ You can only give one reply for each conversation turn.
       temperature = 0.1,
       window = {
         border = 'rounded',
+        height = 0.7,
         layout = 'float',
+        width = 0.7,
       },
     },
   },
