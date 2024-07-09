@@ -10,6 +10,12 @@ return {
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = "single"
+      }
+    )
+
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
 

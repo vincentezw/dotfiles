@@ -7,9 +7,7 @@ return {
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
     -- LSP clients attached to buffer
     local clients_lsp = function()
-      local bufnr = vim.api.nvim_get_current_buf()
-
-      local clients = vim.lsp.buf_get_clients(bufnr)
+      local clients = vim.lsp.get_clients()
       if next(clients) == nil then
         return ""
       end
@@ -21,6 +19,12 @@ return {
       local client_str = table.concat(c, ", ")
       return "(" .. client_str .. ")"
     end
+
+    local filetype = {
+      "filetype",
+      icon_ony = true,
+      colored = true,
+    }
 
     local mode_map = {
       ["n"] = " Normal",
@@ -55,28 +59,18 @@ return {
       ["r"] = " Replace",
       ["rm"] = "MORE",
       ["r?"] = "CONFIRM",
-      ["!"] = "SHELL",
-      ["t"] = "TERMINAL",
+      ["!"] = "Shell",
+      ["t"] = "Terminal",
     }
     vim.api.nvim_command("highlight LualineGreenText guifg=#4db73d ctermfg=248")
     vim.api.nvim_command("highlight LualineGreyText guifg=#a9a9a9 ctermfg=248")
     vim.api.nvim_command("highlight LualineRedText guifg=#cd1e1e ctermfg=248")
 
-    local function deep_merge(t1, t2)
-      for k,v in pairs(t2) do
-        if type(v) == "table" and type(t1[k]) == "table" then
-          deep_merge(t1[k], v)
-        else
-          t1[k] = v
-        end
-      end
-      return t1
-    end
-
-    local cyberdream = require'lualine.themes.cyberdream'
     local extended_cyberdream = {
       normal = {
         a = {fg = "#000000", bg = "#81A9F8" },
+        b = {},
+        c = {},
       },
       insert = {
         a = {fg = "#000000", bg = "#d65a56" },
@@ -95,17 +89,22 @@ return {
       },
     }
 
-    -- configure lualine with modified theme
     lualine.setup({
       options = {
         disabled_filetypes = { "lazy", "neo-tree" },
-        theme = deep_merge(cyberdream, extended_cyberdream),
+        theme = extended_cyberdream,
         component_separators = "",
         section_separators = "",
         color = { bg = nil },
       },
       sections = {
         lualine_a = {
+					--      {
+					-- 	"mode",
+					-- 	fmt = function(str)
+					-- 		return "  " .. str:sub(1, 1)
+					-- 	end,
+					-- },
           {
             function()
               return mode_map[vim.api.nvim_get_mode().mode]
@@ -186,32 +185,15 @@ return {
             padding = { left = 3, right = 2 },
           },
           -- { "fileformat" },
-          { "copilot", color = { fg = "#82C257" }, padding = { right = 3 } },
-          {
-            "filetype",
-            colored = true, -- Enable colored background
-            color = { fg = "#1abc9c", bg = "#2c3e50" },
-            icons_enabled = false,
-            separator = { left = "", right = "" },
-          },
+          { "copilot", color = { fg = "#82C257" }, padding = { right = 1 } },
+          filetype,
         },
-        lualine_y = {
-          {
-            " ", -- Custom empty component as separator
-            draw_empty = true,
-          },
-          {
-            "progress",
-            color = { fg = "#06a4c7", bg = "#2c3e50" },
-            separator = { left = " ", right = " " },
-            padding = { left = 1, right = 1 },
-          },
-        },
+        lualine_y = {},
         lualine_z = {
           {
             "", -- Custom empty component as separator
             draw_empty = true,
-            color = { bg = "#171616" },
+            color = { bg = "#161616" },
             padding = 0,
           },
           {
