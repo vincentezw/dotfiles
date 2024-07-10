@@ -7,7 +7,8 @@ return {
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
     -- LSP clients attached to buffer
     local clients_lsp = function()
-      local clients = vim.lsp.get_clients()
+      local bufnr = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({bufnr = bufnr})
       if next(clients) == nil then
         return ""
       end
