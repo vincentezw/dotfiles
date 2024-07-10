@@ -69,3 +69,4 @@ if [[ -d "/opt/dev/bin" ]]; then
   PATH="/opt/dev/bin:$PATH"
 fi
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/home/vincent/.local/share/gem/ruby/3.0.0/bin:/usr/bin:$PATH"

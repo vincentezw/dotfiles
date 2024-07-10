@@ -27,66 +27,88 @@ return {
       colored = true,
     }
 
-    local mode_map = {
-      ["n"] = " Normal",
-      ["no"] = "O-PENDING",
-      ["nov"] = "O-PENDING",
-      ["noV"] = "O-PENDING",
-      ["no�"] = "O-PENDING",
-      ["niI"] = "NORMAL",
-      ["niR"] = "NORMAL",
-      ["niV"] = "NORMAL",
-      ["nt"] = "NORMAL",
-      ["v"] = " Visual",
-      ["vs"] = " Visual",
-      ["V"] = " Visual line",
-      ["Vs"] = " Visual line",
-      ["\22"] = " Visual block",
-      ["s"] = "SELECT",
-      ["S"] = "S-LINE",
-      ["�"] = "S-BLOCK",
-      ["i"] = "󰏫 Insert",
-      ["ic"] = "󰏫 Insert",
-      ["ix"] = "󰏫 Insert",
-      ["R"] = " Replace",
-      ["Rc"] = "REPLACE",
-      ["Rx"] = "REPLACE",
-      ["Rv"] = "V-REPLACE",
-      ["Rvc"] = "V-REPLACE",
-      ["Rvx"] = "V-REPLACE",
-      ["c"] = "󰘳 Command",
-      ["cv"] = "EX",
-      ["ce"] = "EX",
-      ["r"] = " Replace",
-      ["rm"] = "MORE",
-      ["r?"] = "CONFIRM",
-      ["!"] = "Shell",
-      ["t"] = "Terminal",
-    }
+    -- local mode_map = {
+    --   ["n"] = " Normal",
+    --   ["no"] = "O-PENDING",
+    --   ["nov"] = "O-PENDING",
+    --   ["noV"] = "O-PENDING",
+    --   ["no�"] = "O-PENDING",
+    --   ["niI"] = "NORMAL",
+    --   ["niR"] = "NORMAL",
+    --   ["niV"] = "NORMAL",
+    --   ["nt"] = "NORMAL",
+    --   ["v"] = " Visual",
+    --   ["vs"] = " Visual",
+    --   ["V"] = " Visual line",
+    --   ["Vs"] = " Visual line",
+    --   ["\22"] = " Visual block",
+    --   ["s"] = "SELECT",
+    --   ["S"] = "S-LINE",
+    --   ["�"] = "S-BLOCK",
+    --   ["i"] = "󰏫 Insert",
+    --   ["ic"] = "󰏫 Insert",
+    --   ["ix"] = "󰏫 Insert",
+    --   ["R"] = " Replace",
+    --   ["Rc"] = "REPLACE",
+    --   ["Rx"] = "REPLACE",
+    --   ["Rv"] = "V-REPLACE",
+    --   ["Rvc"] = "V-REPLACE",
+    --   ["Rvx"] = "V-REPLACE",
+    --   ["c"] = "󰘳 Command",
+    --   ["cv"] = "EX",
+    --   ["ce"] = "EX",
+    --   ["r"] = " Replace",
+    --   ["rm"] = "MORE",
+    --   ["r?"] = "CONFIRM",
+    --   ["!"] = "Shell",
+    --   ["t"] = "Terminal",
+    -- }
     vim.api.nvim_command("highlight LualineGreenText guifg=#4db73d ctermfg=248")
     vim.api.nvim_command("highlight LualineGreyText guifg=#a9a9a9 ctermfg=248")
     vim.api.nvim_command("highlight LualineRedText guifg=#cd1e1e ctermfg=248")
 
+    -- local extended_cyberdream = {
+    --   normal = {
+    --     a = {fg = "#000000", bg = "#81A9F8" },
+    --     b = {},
+    --     c = {},
+    --   },
+    --   insert = {
+    --     a = {fg = "#000000", bg = "#d65a56" },
+    --   },
+    --   visual = {
+    --     a = {fg = "#000000", bg = "#9b78bf" },
+    --   },
+    --   replace = {
+    --     a = {fg = "#000000", bg = "#c46333" },
+    --   },
+    --   command = {
+    --     a = { fg = "#000000", bg = "#78bf7c" },
+    --   },
+    --   terminal = {
+    --     a = { fg = "#000000", bg = "#c261bf" },
+    --   },
+    -- }
     local extended_cyberdream = {
       normal = {
-        a = {fg = "#000000", bg = "#81A9F8" },
+        a = {fg = "#81A9F8" },
         b = {},
         c = {},
       },
       insert = {
-        a = {fg = "#000000", bg = "#d65a56" },
+        a = {fg = "#d65a56" },
       },
       visual = {
-        a = {fg = "#000000", bg = "#9b78bf" },
+        a = {fg = "#9b78bf" },
       },
       replace = {
-        a = {fg = "#000000", bg = "#c46333" },
+        a = {fg = "#c46333" },
       },
       command = {
-        a = { fg = "#000000", bg = "#78bf7c" },
+        a = {fg = "#78bf7c" },
       },
       terminal = {
-        a = { fg = "#000000", bg = "#c261bf" },
+        a = {fg = "#c261bf" },
       },
     }
 
@@ -100,18 +122,25 @@ return {
       },
       sections = {
         lualine_a = {
-					--      {
-					-- 	"mode",
-					-- 	fmt = function(str)
-					-- 		return "  " .. str:sub(1, 1)
-					-- 	end,
-					-- },
           {
-            function()
-              return mode_map[vim.api.nvim_get_mode().mode]
-            end,
-            separator = { left = " ", right = "" },
-          },
+						"mode",
+						fmt = function(str)
+              local short = str:sub(1, 1)
+              if str == "V-LINE" then
+                short = "VL"
+              elseif str == "V-BLOCK" then
+                short = "VB"
+              end
+
+							return "  " .. short
+						end,
+					},
+          -- {
+          --   function()
+          --     return mode_map[vim.api.nvim_get_mode().mode]
+          --   end,
+          --   separator = { left = " ", right = "" },
+          -- },
         },
         lualine_b = {
           {

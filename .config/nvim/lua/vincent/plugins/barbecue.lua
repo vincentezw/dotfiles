@@ -15,6 +15,7 @@ return {
     vim.api.nvim_command("highlight BarbecueGreenText guifg=#69C8C8 ctermfg=248")
 
     require("barbecue").setup({
+      attach_navic = false,
       create_autocmd = false, -- prevent barbecue from updating itself automatically
       exclude_filetypes = { "neo-tree", "goto-preview" },
       show_basename = false,

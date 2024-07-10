@@ -20,6 +20,17 @@ return {
     local opts = { noremap = true, silent = true }
 
     local on_attach = function(client, bufnr)
+      local attach_navic = true
+      if client.name == "sorbet" or client.name == "ruby_lsp" then
+        local clients = vim.lsp.get_clients({bufnr = bufnr})
+        if clients('sorbet') or clients('ruby_lsp') then
+          attach_navic = false
+        end
+      end
+      if attach_navic and client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+
       opts.buffer = bufnr
       -- set keybinds
       opts.desc = "Show LSP references"
