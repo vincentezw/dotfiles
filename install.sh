@@ -38,10 +38,10 @@ if [ -n "$SPIN" ]; then
     echo "Gem bin path added to PATH."
   fi
 
-  NEOVIM_VERSION=0.10.0
-  wget -qO nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux64.tar.gz \
-    && sudo tar -C /usr/local --strip-components=1 -xf nvim-linux64.tar.gz \
-    && rm nvim-linux64.tar.gz
+  # NEOVIM_VERSION=0.10.0
+  # wget -qO nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux64.tar.gz \
+  #   && sudo tar -C /usr/local --strip-components=1 -xf nvim-linux64.tar.gz \
+  #   && rm nvim-linux64.tar.gz
   nvim --headless "+Lazy! restore" +qa
 else
   ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
