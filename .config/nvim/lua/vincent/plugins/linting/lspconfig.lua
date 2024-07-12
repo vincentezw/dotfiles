@@ -23,7 +23,7 @@ return {
       local attach_navic = true
       if client.name == "sorbet" or client.name == "ruby_lsp" then
         local clients = vim.lsp.get_clients({bufnr = bufnr})
-        if clients('sorbet') or clients('ruby_lsp') then
+        if clients['sorbet'] or clients['ruby_lsp'] then
           attach_navic = false
         end
       end
