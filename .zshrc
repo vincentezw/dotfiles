@@ -6,7 +6,6 @@ alias clipboard="kitty +kitten clipboard"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(
-  1password
   colored-man-pages
   git
   npm
@@ -14,10 +13,11 @@ plugins=(
   ruby
   systemd
   starship
-  yarn
 )
 if [ -z "$SPIN" ]; then
   plugins+=(macos)
+  plugins+=(1password)
+  plugins+=(yarn)
 fi
 source $ZSH/oh-my-zsh.sh
 
