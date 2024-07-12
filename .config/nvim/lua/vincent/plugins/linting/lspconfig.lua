@@ -23,8 +23,11 @@ return {
       local attach_navic = true
       if client.name == "sorbet" or client.name == "ruby_lsp" then
         local clients = vim.lsp.get_clients({bufnr = bufnr})
-        if clients['sorbet'] or clients['ruby_lsp'] then
-          attach_navic = false
+        for _, lsp_client in ipairs(clients) do
+          if lsp_client.name == 'sorbet' or lsp_client.name == 'ruby_lsp' then
+            attach_navic = false
+            break
+          end
         end
       end
       if attach_navic and client.server_capabilities["documentSymbolProvider"] then
