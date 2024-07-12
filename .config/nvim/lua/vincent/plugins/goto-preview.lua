@@ -9,7 +9,8 @@ return {
       preview_window_title = { enable = true, position = "center" },
       post_open_hook = function(buffer, window)
         -- Disable LSP for this buffer
-        vim.api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
+        -- vim.api.nvim_buf_set_option(buffer, 'buftype', 'nofile')
+        -- vim.lsp.diagnostic.set_virtual_text({}, 0, {publishDiagnostics = false})
         -- Override the highlight group for the title text
         vim.api.nvim_set_option_value("winhighlight", "FloatTitle:GotoPreviewTitle", {win = window})
         vim.keymap.set('n', 'q', function()
