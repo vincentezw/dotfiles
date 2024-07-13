@@ -21,15 +21,18 @@ return {
 
     local on_attach = function(client, bufnr)
       local attach_navic = true
-      if client.name == "sorbet" or client.name == "ruby_lsp" then
-        local clients = vim.lsp.get_clients({bufnr = bufnr})
-        for _, lsp_client in ipairs(clients) do
-          if lsp_client.name == 'sorbet' or lsp_client.name == 'ruby_lsp' then
-            attach_navic = false
-            break
-          end
-        end
+      if client.name == "sorbet" then
+        attach_navic = false
       end
+      -- if client.name == "sorbet" or client.name == "ruby_lsp" then
+      --   local clients = vim.lsp.get_clients({bufnr = bufnr})
+      --   for _, lsp_client in ipairs(clients) do
+      --     if lsp_client.name == 'sorbet' or lsp_client.name == 'ruby_lsp' then
+      --       attach_navic = false
+      --       break
+      --     end
+      --   end
+      -- end
       if attach_navic and client.server_capabilities["documentSymbolProvider"] then
         require("nvim-navic").attach(client, bufnr)
       end

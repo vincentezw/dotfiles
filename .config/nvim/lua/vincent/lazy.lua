@@ -13,10 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { import = "vincent.plugins" },
-  { import = "vincent.plugins.linting" }
+  { import = "vincent.plugins.codetools" }
 }, {
   install = {
-    colorscheme = { "evening" },
+    colorscheme = { "murphy" },
   },
   checker = {
     enabled = true,
