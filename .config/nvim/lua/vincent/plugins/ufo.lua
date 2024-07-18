@@ -5,16 +5,29 @@ return {
     vim.opt.foldlevel = 99
     vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
-    local ftMap = {
-      vim = 'indent',
-      python = {'indent'},
-      git = ''
-    }
     require("ufo").setup({
+      preview = {
+        win_config = {
+          winblend = 0,
+        }
+      },
       provider_selector = function(bufnr, filetype, buftype)
-        return ftMap[filetype]
-      end,
+        return {'treesitter', 'indent'}
+      end
     })
+    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    local opts = {
+      noremap = true,
+      silent = true,
+      desc = "Show documentation for what is under cursor",
+    }
+    vim.keymap.set('n', 'K', function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.lsp.buf.hover()
+      end
+    end, opts)
   end,
   dependencies = {
     "kevinhwang91/promise-async",

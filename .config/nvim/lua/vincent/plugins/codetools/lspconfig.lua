@@ -12,7 +12,7 @@ return {
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
       vim.lsp.handlers.hover, {
-        border = "single"
+        border = "rounded"
       }
     )
 
@@ -21,18 +21,9 @@ return {
 
     local on_attach = function(client, bufnr)
       local attach_navic = true
-      if client.name == "sorbet" then
+      if client.name == "sorbet" or client.name == "graphql"then
         attach_navic = false
       end
-      -- if client.name == "sorbet" or client.name == "ruby_lsp" then
-      --   local clients = vim.lsp.get_clients({bufnr = bufnr})
-      --   for _, lsp_client in ipairs(clients) do
-      --     if lsp_client.name == 'sorbet' or lsp_client.name == 'ruby_lsp' then
-      --       attach_navic = false
-      --       break
-      --     end
-      --   end
-      -- end
       if attach_navic and client.server_capabilities["documentSymbolProvider"] then
         require("nvim-navic").attach(client, bufnr)
       end
@@ -61,18 +52,20 @@ return {
       keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
       opts.desc = "󰒭 diagnostic"
       keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-      opts.desc = "Show documentation for what is under cursor"
-      keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+      -- opts.desc = "Show documentation for what is under cursor"
+      -- keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true
-    }
+    -- comment out for ufo using LSP as fold provider
+    -- don't forget to disable treeseitter in the ufo config then
+    -- capabilities.textDocument.foldingRange = {
+    --   dynamicRegistration = false,
+    --   lineFoldingOnly = true
+    -- }
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
