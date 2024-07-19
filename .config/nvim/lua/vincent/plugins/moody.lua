@@ -27,5 +27,6 @@ return {
       terminal = "#c261bf",
       terminal_n = "#00BBCC",
     },
+    disabled_filetypes = { "TelescopePrompt" },
   },
 }
