@@ -36,6 +36,7 @@ return {
           hi TelescopeResultsTitle guifg=#141313 guibg=#6ACBCB
 
           hi IncSearch guibg=#ec2ef2
+          hi VincentHeader guifg=#ec2ef2 guibg=#161616
         ]],
         {output = false}
       )
