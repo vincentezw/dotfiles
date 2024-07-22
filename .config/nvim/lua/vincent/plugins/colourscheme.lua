@@ -37,6 +37,7 @@ return {
 
           hi IncSearch guibg=#ec2ef2
           hi VincentHeader guifg=#ec2ef2 guibg=#161616
+          hi Folded guibg=#0c2624
         ]],
         {output = false}
       )
