@@ -1,6 +1,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
+  lazy = false,
   opts = {},
   config = function()
     local highlight = {
@@ -25,9 +26,20 @@ return {
       vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
     end)
 
-    -- vim.g.rainbow_delimiters = { highlight = highlight }
-    require("ibl").setup({ scope = { highlight = highlight } })
+    hooks.register(hooks.type.SCOPE_HIGHLIGHT, function(_, _, scope, _)
+      if scope:type() == "if_statement" then
+        return 2
+      end
+      return 1
+    end)
 
-    -- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    require("ibl").setup{
+      scope = {
+        char = "┊",
+        enabled = true,
+        show_start = true,
+        highlight = highlight,
+      },
+    }
   end,
 }
