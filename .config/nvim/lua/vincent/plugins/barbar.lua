@@ -36,10 +36,13 @@ return {
     local map = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
 
-    -- Move to previous/next
+    opts.desc = "Previous buffer"
     map("n", "<leader>,", "<Cmd>BufferPrevious<CR>", opts)
+    opts.desc = "Next buffer"
     map("n", "<leader>.", "<Cmd>BufferNext<CR>", opts)
+    opts.desc = "Move to previous buffer"
     map("n", "<leader><", "<Cmd>BufferMovePrevious<CR>", opts)
+    opts.desc = "Move to next buffer"
     map("n", "<leader>>", "<Cmd>BufferMoveNext<CR>", opts)
     map("n", "<leader>1", "<Cmd>BufferGoto 1<CR>", opts)
     map("n", "<leader>2", "<Cmd>BufferGoto 2<CR>", opts)
@@ -51,6 +54,10 @@ return {
     map("n", "<leader>8", "<Cmd>BufferGoto 8<CR>", opts)
     map("n", "<leader>9", "<Cmd>BufferGoto 9<CR>", opts)
     map("n", "<leader>0", "<Cmd>BufferLast<CR>", opts)
+    opts.desc = "Close buffer"
+    map("n", "<leader>bx", "<Cmd>BufferClose<CR>", opts)
+    opts.desc = "Close all but current"
+    map("n", "<leader>ba", "<Cmd>BufferCloseAllButCurrent<CR>", opts)
  end,
   opts = {
     animation = true,
