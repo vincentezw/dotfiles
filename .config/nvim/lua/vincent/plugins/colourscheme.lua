@@ -18,10 +18,10 @@ return {
         [[
           hi GotoPreviewTitle guifg=#141313 guibg=#6ACBC4
           hi BufferCurrent gui=italic guibg=#3f66a6
-          hi BufferCurrentMod gui=italic guifg=#ff9e64 guibg=#3f66a6
+          hi BufferCurrentMod gui=italic guifg=#6ACBC4 guibg=#3f66a6
           hi BufferCurrentSign guifg=#161616 guibg=#3f66a6
           hi BufferInactive guibg=#161616
-          hi BufferInactiveMod guibg=#161616 guifg=#ff9e64
+          hi BufferInactiveMod guibg=#161616 guifg=#6ACBC4
           hi BufferInactiveSign guifg=#161616 guibg=#161616
           hi BufferVisibleSign guifg=#161616 guibg=#2E2E2E
           hi BufferVisible gui=italic guibg=#2E2E2E

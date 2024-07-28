@@ -1,6 +1,5 @@
 return {
   "nvim-lualine/lualine.nvim",
-  -- dependencies = { "DaikyXendo/nvim-material-icon", "nvim-tree/nvim-web-devicons", "ofseed/copilot-status.nvim" },
   dependencies = { "DaikyXendo/nvim-material-icon", "AndreM222/copilot-lualine" },
   config = function()
     local lualine = require("lualine")
@@ -33,24 +32,24 @@ return {
 
     local extended_cyberdream = {
       normal = {
-        a = {fg = "#81A9F8" },
+        a = {fg = "#161616", bg = "#81A9F8" },
         b = {},
         c = {},
       },
       insert = {
-        a = {fg = "#78bf7c" },
+        a = {fg = "#161616", bg = "#78bf7c" },
       },
       visual = {
-        a = {fg = "#dedc71" },
+        a = {fg = "#161616", bg = "#dedc71" },
       },
       replace = {
-        a = {fg = "#c46333" },
+        a = {fg = "#161616", bg = "#c46333" },
       },
       command = {
-        a = {fg = "#d65a56" },
+        a = {fg = "#161616", bg = "#d65a56" },
       },
       terminal = {
-        a = {fg = "#c261bf" },
+        a = {fg = "#161616", bg = "#c261bf" },
       },
     }
 
@@ -74,15 +73,10 @@ return {
                 short = "VB"
               end
 
-							return "  " .. short
+              return short
 						end,
+            separator = { left = "", right = "" },
 					},
-          -- {
-          --   function()
-          --     return mode_map[vim.api.nvim_get_mode().mode]
-          --   end,
-          --   separator = { left = " ", right = "" },
-          -- },
         },
         lualine_b = {
           {
@@ -105,8 +99,8 @@ return {
               return string.format("%s%s%s", bracket_open, name, bracket_close)
             end,
             diagnostics_color = {
-              error = { fg = "#9F5D62" },
-              warn = { fg = "#B5A075" },
+              error = { fg = "#ff6e5e" },
+              warn = { fg = "#f1ff5e" },
             },
           },
           {
@@ -153,26 +147,22 @@ return {
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
-            color = { fg = "#ff9e64" },
+            color = { fg = "#ff6e5e" },
             padding = { left = 3, right = 2 },
           },
-          -- { "fileformat" },
           { "copilot", color = { fg = "#82C257" }, padding = { right = 1 } },
           filetype,
         },
         lualine_y = {},
         lualine_z = {
           {
-            "", -- Custom empty component as separator
-            draw_empty = true,
-            color = { bg = "#161616" },
-            padding = 0,
-          },
-          {
             "location",
-            color = { fg = "#9E85D4", bg = "#2c3e50" },
-            separator = { left = " ", right = " " },
-            padding = { left = 1, right = 1 },
+						fmt = function(str)
+              str = str:gsub("%s+", "")
+              return "󰹹" .. str
+            end,
+            color = { bg = "#161616", fg = "#9E85D4" },
+            padding = { left = 1, right = 0 },
           },
         },
       },
