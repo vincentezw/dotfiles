@@ -14,8 +14,9 @@ return {
       return
     end
     neo_tree.setup({
-      popup_border_style = "single",
-      -- closes neotree automatically when it's the last **WINDOW** in the view
+      enable_diagnostics = true,
+      enable_git_status = true,
+      popup_border_style = "rounded",
       auto_close = true,
       open_on_setup = false,
       -- if {output: true}, the neotree will resize itself based on the number of entries
@@ -23,12 +24,14 @@ return {
       auto_resize = true,
       disable_on_buf_enter = false,
       hijack_cursor = true,
-      follow_current_file = {
-        enabled = true,
+      buffers = {
+        follow_current_file = {
+          enabled = true,
+        },
       },
       add_trailing = true,
       group_empty = true,
-      lsp_diagnostics = true,
+      -- lsp_diagnostics = true,
       sources = {
         "filesystem",
         "buffers",
@@ -61,6 +64,7 @@ return {
           end,
           ["P"] = function(state)
             local node = state.tree:get_node()
+            print(node)
             require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
           end
         },
