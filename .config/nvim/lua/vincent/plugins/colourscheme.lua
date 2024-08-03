@@ -25,7 +25,7 @@ return {
           hi BufferInactiveSign guifg=#161616 guibg=#161616
           hi BufferVisibleSign guifg=#161616 guibg=#2E2E2E
           hi BufferVisible gui=italic guibg=#2E2E2E
-          hi BufferTabpageFill guibg=#161616
+          hi BufferTabpageFill guibg=none ctermbg=black
 
           hi NeoTreeTabActive gui=italic
           hi NeoTreeTabInactive guibg=#161616
