@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/vincentezw/dotfiles/main/garmin.json",
+  "title": "Home",
+  "items": [
+    {
+      "entity": "light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off",
+      "name": "Bedside light",
+      "type": "toggle"
+    },
+    {
+      "entity": "light.signify_netherlands_b_v_lwa012_huelight",
+      "name": "Front room",
+      "type": "toggle"
+    }
+  ]
+}
