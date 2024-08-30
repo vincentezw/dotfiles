@@ -11,6 +11,27 @@
       "entity": "light.signify_netherlands_b_v_lwa012_huelight",
       "name": "Front room",
       "type": "toggle"
+    },
+    {
+      "name": "Room stats",
+      "type": "group",
+      "items": [
+        {
+          "name": "Outside",
+          "type": "template",
+          "content": "{{ states('sensor.outdoor_temperature') }}°C {{ states('sensor.humidity') }}%"
+        },
+        {
+          "name": "Front room",
+          "type": "template",
+          "content": "{{ states('sensor.front_room_temperature_temperature_2') }}°C {{ states('sensor.front_room_temperature_humidity') }}%"
+        },
+        {
+          "name": "Office",
+          "type": "template",
+          "content": "{{ states('sensor.lumi_lumi_weather_temperature') }}°C {{ states('sensor.lumi_lumi_weather_humidity') }}%"
+        }
+      ]
     }
   ]
 }
