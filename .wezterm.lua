@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
-local fonts = { "VictorMono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
-local font_size = wezterm.hostname() == "vincent" and 12.0 or 14.0
+local fonts = { "Victor Mono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
+local font_size = wezterm.hostname() == "ashi" and 11.0 or 14.0
 local theme = {
   background = "#161616",
   foreground = "#f4f4f4",
@@ -86,19 +86,19 @@ return {
       repeat_x = 'Mirror',
       repeat_y = 'Mirror',
       source = {
-        File = '/Users/vincent/.config/kitty/bg/mountains.png',
+        File = wezterm.home_dir .. '/.config/kitty/bg/mountains.png',
       },
     },
   },
   front_end = "WebGpu",
   webgpu_power_preference = "HighPerformance",
-  enable_wayland = false,
+  enable_wayland = true,
   window_decorations = window_decorations,
   -- window_decorations = "INTEGRATED_BUTTONS|RESIZE",
   font = wezterm.font_with_fallback(fonts),
   font_size = font_size,
   use_fancy_tab_bar = false,
-  hide_tab_bar_if_only_one_tab = false,
+  hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
   colors = {
     background = theme.background,
