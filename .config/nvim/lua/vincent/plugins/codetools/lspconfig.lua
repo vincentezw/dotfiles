@@ -115,7 +115,7 @@ return {
     local lsp_servers = {
       'ruby_lsp',
       'html',
-      'tsserver',
+      'ts_ls',
       'cssls',
       'tailwindcss',
       'graphql',
