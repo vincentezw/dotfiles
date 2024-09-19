@@ -55,9 +55,9 @@ fi
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
 if [ -n "$SPIN" ]; then
-  alias ls="exa --long --header --icons"
+  alias ls="eza --long --header --icons"
 else
-  alias ls="exa --long --header --icons --git"
+  alias ls="eza --long --header --icons --git"
 fi
 
 # step notes with nb.sh if it's not already set up
