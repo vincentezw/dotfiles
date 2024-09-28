@@ -64,7 +64,6 @@ return {
           end,
           ["P"] = function(state)
             local node = state.tree:get_node()
-            print(node)
             require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
           end
         },

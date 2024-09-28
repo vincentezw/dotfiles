@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local fonts = { "VictorMono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
-local font_size = 14.0
+local font_size = wezterm.hostname() == "vincent" and 12.0 or 14.0
 local theme = {
   background = "#161616",
   foreground = "#f4f4f4",
@@ -38,6 +38,9 @@ local function tab_title(tab_info)
   -- Otherwise, use the title from the active pane
   return ' ' .. tab_info.active_pane.title .. ' '
 end
+
+local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
+local window_decorations = is_linux and "NONE" or "RESIZE"
 
 wezterm.on(
   'format-tab-title',
@@ -90,7 +93,7 @@ return {
   front_end = "WebGpu",
   webgpu_power_preference = "HighPerformance",
   enable_wayland = false,
-  window_decorations = "RESIZE",
+  window_decorations = window_decorations,
   -- window_decorations = "INTEGRATED_BUTTONS|RESIZE",
   font = wezterm.font_with_fallback(fonts),
   font_size = font_size,
@@ -116,6 +119,7 @@ return {
       { Text = " 󰐕 " },
     },
   },
+  tab_max_width = 128,
   window_frame = {
     font = wezterm.font_with_fallback(fonts),
     font_size = font_size,
