@@ -1,18 +1,19 @@
-after-startup-command = []
+after-startup-command = [
+  'exec-and-forget borders active_color=0xee33ccff inactive_color=0xaa595959 width=5.0'
+]
 start-at-login = true
-
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 [gaps]
-inner.horizontal = 3
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
+inner.horizontal = 8
+inner.vertical =   8
+outer.left =       5
+outer.bottom =     5
+outer.top =        5
+outer.right =      5
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'

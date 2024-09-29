@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
+local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
 
-local fonts = { "Victor Mono Nerd Font", "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
+local victor_font = is_linux and "Victor Mono Nerd Font" or "VictorMono Nerd Font"
+local fonts = { victor_font, "Fira Code", "JetBrains Mono", "Cascadia Code", "Hack Nerd Font" }
 local font_size = wezterm.hostname() == "ashi" and 11.0 or 14.0
 local theme = {
   background = "#161616",
@@ -39,7 +41,6 @@ local function tab_title(tab_info)
   return ' ' .. tab_info.active_pane.title .. ' '
 end
 
-local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
 local window_decorations = is_linux and "NONE" or "RESIZE"
 
 wezterm.on(
