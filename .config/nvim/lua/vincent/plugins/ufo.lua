@@ -28,6 +28,15 @@ return {
         vim.lsp.buf.hover()
       end
     end, opts)
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = { 'neo-tree', 'NeogitStatus' },
+      callback = function()
+        require('ufo').detach()
+        -- vim.opt_local.foldenable = false
+        -- vim.opt_local.foldcolumn = '0'
+      end,
+    })
   end,
   dependencies = {
     "kevinhwang91/promise-async",
@@ -40,7 +49,6 @@ return {
           relculright = true,
           bt_ignore = { "nofile", "prompt" },
           ft_ignore = {
-            "nofile",
             "neo-tree",
             "TelescopePrompt",
             "TelescopeResults",

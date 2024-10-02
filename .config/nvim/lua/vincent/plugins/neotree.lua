@@ -6,6 +6,7 @@ return {
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
     "3rd/image.nvim",
+    "kevinhwang91/nvim-ufo",
   },
   config = function()
     local status_ok, neo_tree = pcall(require, "neo-tree")
@@ -71,11 +72,11 @@ return {
     })
 
     local keymap = vim.keymap -- for conciseness
-
     keymap.set("n", "<leader>ee", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer" })
     keymap.set("n", "<leader>er", "<cmd>Neotree git_base=HEAD<CR>", { desc = "Go to git base" })
     keymap.set("n", "<leader>eb", "<cmd>Neotree float buffers<CR>", { desc = "Go to git base" })
     keymap.set("n", "<leader>eg", "<cmd>Neotree float git_status git_base=main<CR>", { desc = "Go to git base" })
     keymap.set("n", "<leader>es", "<cmd>Neotree float document_symbols<CR>", { desc = "Go to git base" })
   end,
+  priority = 51,
 }
