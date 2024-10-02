@@ -55,9 +55,9 @@ return {
     map("n", "<leader>9", "<Cmd>BufferGoto 9<CR>", opts)
     map("n", "<leader>0", "<Cmd>BufferLast<CR>", opts)
     opts.desc = "Close buffer"
-    map("n", "<leader>bx", "<Cmd>BufferClose<CR>", opts)
+    map("n", "<leader>x", "<Cmd>BufferClose<CR>", opts)
     opts.desc = "Close all but current"
-    map("n", "<leader>ba", "<Cmd>BufferCloseAllButCurrent<CR>", opts)
+    map("n", "<leader>X", "<Cmd>BufferCloseAllButCurrent<CR>", opts)
  end,
   opts = {
     animation = true,
