@@ -31,22 +31,31 @@ local theme = {
 
 local tab_edge_right = ""
 local tab_edge_left = ""
-local function tab_title(tab_info)
+local function tab_title(tab_info, pane)
+  local tmux_session = pane.user_vars.tab_title
+  if tmux_session and #tmux_session > 0 then
+    return ' ' .. tmux_session .. ' '
+  end
   local title = tab_info.tab_title
-  -- if the tab title is explicitly set, take that
   if title and #title > 0 then
     return ' ' .. title .. ' '
   end
-  -- Otherwise, use the title from the active pane
   return ' ' .. tab_info.active_pane.title .. ' '
 end
 
 local window_decorations = is_linux and "NONE" or "RESIZE"
 
+wezterm.on('user-var-changed', function(window, pane, name, value)
+  print(name)
+  print(value)
+  print("yeah")
+end)
+
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
-    local title = tab_title(tab)
+    local pane = tab.active_pane
+    local title = tab_title(tab, pane)
     if tab.is_active then
       return {
         { Background = { Color = theme.panel.background } },
@@ -127,6 +136,6 @@ return {
   },
   window_padding = {
     left = 8, right = 3,
-    top = 3, bottom = 0,
+    top = 13, bottom = 0,
   },
 }

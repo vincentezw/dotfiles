@@ -68,6 +68,9 @@ main() {
   set pane-active-border-style "fg=$colour_turqois"
   set display-panes-active-colour "${thm_text}"
   set display-panes-colour "${colour_turqois}"
+  
+  set window-style "fg=$thm_muted"
+  set window-active-style "fg=$thm_text"
 
   # Windows
   setw window-status-style "fg=${thm_iris},bg=${colour_bg}"
@@ -83,16 +86,15 @@ main() {
   local spacer = " "
   # I know, stupid, right? For some reason, spaces aren't consistent
 
-  local readonly show_window=" #[fg=$thm_love]  #[fg=$thm_rose]#W$spacer"
-  local readonly show_window_in_window_status_current="$spacer #[fg=$thm_love]󰶭  #[fg=$thm_overlay]#I#[fg=$thm_overlay,bg=""]$left_separator#[fg=$thm_overlay,bg=""]#W"
+  # local readonly show_window=" #[fg=$thm_love]  #[fg=$thm_rose]#W$spacer"
+  local readonly show_window="$spacer #[fg=$thm_love]  #[fg=$thm_overlay]#{=-1:pane_id}#[fg=$thm_overlay,bg=""]$left_separator#[fg=$thm_overlay,bg=""]#W"
   local readonly show_session="#[fg=$thm_love]  #[fg=$thm_overlay]#S "
   local readonly show_date_time="$spacer #[fg=$colour_bubble] #[bg=$colour_bubble fg=$thm_love] 󰥔  $spacer#[fg=$colour_bubble_text]$date $spacer $time $spacer#[bg=$colour_bg fg=$colour_bubble] $spacer"
   local show_music="$spacer #[fg=$colour_bubble] #[bg=$colour_bubble fg=$thm_love] 󰎆 #[fg=$colour_bubble_text] #{spotify_now_playing} $spacer#[bg=$colour_bg fg=$colour_bubble]$spacer"
   local weather="#[fg=$colour_bubble]#[bg=$colour_bubble fg=$colour_bubble_text] #{weather} #[bg=$colour_bg fg=$colour_bubble]$spacer "
   window_status_format=$show_window_in_window_status
-  window_status_current_format=$show_window_in_window_status_current
   setw window-status-format "$window_status_format"
-  setw window-status-current-format "$window_status_current_format"
+  setw window-status-current-format ""
 
   local left_column=$show_session$show_window
   # We set the sections

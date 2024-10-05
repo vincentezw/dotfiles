@@ -20,6 +20,7 @@ if [ -z "$SPIN" ]; then
   plugins+=(yarn)
 fi
 source $ZSH/oh-my-zsh.sh
+source ~/dotfiles/wezterm-shell-integration.sh
 
 base_paths=(
   "/opt/homebrew/share"
@@ -45,6 +46,16 @@ done
 if command -v rbenv &> /dev/null; then
   eval "$(rbenv init - zsh)"
 fi
+
+tt() {
+  local title="${1:-$(basename "$PWD")}"
+  if [[ -z "${TMUX-}" ]]; then
+    printf "\033]1337;SetUserVar=%s=%s\007" "tab_title" "$(echo -n "$title" | base64)"
+  else
+    tmux rename-session "$title"
+    printf "\033Ptmux;\033\033]1337;SetUserVar=%s=%s\007\033\\" "tab_title" "$(echo -n "$title" | base64)"
+  fi
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
