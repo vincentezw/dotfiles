@@ -1,7 +1,5 @@
 alias vim="nvim"
 alias vi="nvim"
-alias ssh="kitty +kitten ssh"
-alias clipboard="kitty +kitten clipboard"
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -56,6 +54,13 @@ tt() {
     printf "\033Ptmux;\033\033]1337;SetUserVar=%s=%s\007\033\\" "tab_title" "$(echo -n "$title" | base64)"
   fi
 }
+
+clipboard() {
+  local data
+  data=$(cat)
+  printf "\033]52;c;$(printf '%s' "$data" | base64 | tr -d '\n')\a"
+}
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
