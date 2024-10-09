@@ -9,16 +9,16 @@
         {
           "name": "Current state",
           "type": "template",
-          "content": "{% if is_state('light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off', 'off') %}off{% else %}{{ state_attr('light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off', 'brightness') | int }}%{% endif %}"
+          "content": "{% if is_state('light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off', 'off') %}off{% else %}{{ (state_attr('light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off', 'brightness') | int / 255 * 100) | round(0) }}%{% endif %}"
         },
         {
           "entity": "light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off",
-          "name": "Set 1%",
+          "name": "Set 5%",
           "type": "tap",
           "tap_action": {
             "service": "light.turn_on",
             "data": {
-              "brightness_pct": 1
+              "brightness_pct": 5
             }
           }
         },
@@ -32,12 +32,28 @@
               "brightness_pct": 50
             }
           }
+        },
+        {
+          "entity": "light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off",
+          "name": "Set 100%",
+          "type": "tap",
+          "tap_action": {
+            "service": "light.turn_on",
+            "data": {
+              "brightness_pct": 100
+            }
+          }
         }
       ]
     },
     {
       "entity": "light.signify_netherlands_b_v_lwa012_huelight",
-      "name": "Front room",
+      "name": "Front room light",
+      "type": "toggle"
+    },
+    {
+      "entity": "light.signify_netherlands_b_v_lwa001_level_on_off",
+      "name": "Bathroom room light",
       "type": "toggle"
     },
     {
@@ -83,6 +99,37 @@
           "name": "Office",
           "type": "template",
           "content": "🌡{{ states('sensor.lumi_lumi_weather_temperature') }}°C 💧{{ states('sensor.lumi_lumi_weather_humidity') }}%"
+        }
+      ]
+    },
+    {
+      "name": "Humidity",
+      "type": "group",
+      "items": [
+        {
+          "name": "Outside",
+          "type": "template",
+          "content": "💧{{ states('sensor.abs_hum_outside') }} g/m³ - {{ states('sensor.humidity') }}%"
+        },
+        {
+          "name": "Bedroom",
+          "type": "template",
+          "content": "💧{{ states('sensor.abs_hum_bedroom') }} g/m³: {% if states('sensor.abs_hum_bedroom') | float > states('sensor.abs_hum_outside') | float %}ventilate room{% else %}do not ventilate{% endif %}"
+        },
+        {
+          "name": "Dining room",
+          "type": "template",
+          "content": "💧{{ states('sensor.abs_hum_dining_room') }} g/m³: {% if states('sensor.abs_hum_dining_room') | float > states('sensor.abs_hum_outside') | float %}ventilate room{% else %}do not ventilate{% endif %}"
+        },
+        {
+          "name": "Kaya's room",
+          "type": "template",
+          "content": "💧{{ states('sensor.abs_hum_kaya_room') }} g/m³: {% if states('sensor.abs_hum_kaya_room') | float > states('sensor.abs_hum_outside') | float %}ventilate room{% else %}do not ventilate{% endif %}"
+        },
+        {
+          "name": "Kitchen",
+          "type": "template",
+          "content": "💧{{ states('sensor.abs_hum_kitchen') }} g/m³: {% if states('sensor.abs_hum_kitchen') | float > states('sensor.abs_hum_outside') | float %}ventilate room{% else %}do not ventilate{% endif %}"
         }
       ]
     }
