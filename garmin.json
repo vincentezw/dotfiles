@@ -13,12 +13,12 @@
         },
         {
           "entity": "light.signify_netherlands_b_v_lwa011_1f62340b_level_on_off",
-          "name": "Set 5%",
+          "name": "Set 1%",
           "type": "tap",
           "tap_action": {
             "service": "light.turn_on",
             "data": {
-              "brightness_pct": 5
+              "brightness_pct": 1
             }
           }
         },
@@ -47,9 +47,25 @@
       ]
     },
     {
-      "entity": "light.signify_netherlands_b_v_lwa012_huelight",
-      "name": "Front room light",
-      "type": "toggle"
+      "name": "Front room",
+      "type": "group",
+      "items": [
+        {
+          "entity": "light.signify_netherlands_b_v_lwa012_huelight",
+          "name": "Main light",
+          "type": "toggle"
+        },
+        {
+          "entity": "switch.kitchen_socket_switch",
+          "name": "Computer",
+          "type": "toggle"
+        },
+        {
+          "entity": "light.desk_light_light",
+          "name": "Desk light",
+          "type": "toggle"
+        }
+      ]
     },
     {
       "entity": "light.signify_netherlands_b_v_lwa001_level_on_off",
