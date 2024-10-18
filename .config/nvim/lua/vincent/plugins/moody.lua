@@ -7,7 +7,7 @@ return {
   opts = {
     blends = {
       normal = 0.3,
-      insert = 0.2,
+      insert = 0.25,
       visual = 0.35,
       command = 0.2,
       operator = 0.2,
@@ -23,7 +23,8 @@ return {
       visual = "#dedc71",
       operator = "#FF8F40",
       replace = "#E66767",
-      select = "#AD6FF7",
+      -- select = "#AD6FF7",
+      select = "#dedc71",
       terminal = "#c261bf",
       terminal_n = "#00BBCC",
     },

@@ -58,6 +58,14 @@ return {
     map("n", "<leader>x", "<Cmd>BufferClose<CR>", opts)
     opts.desc = "Close all but current"
     map("n", "<leader>X", "<Cmd>BufferCloseAllButCurrent<CR>", opts)
+    opts.desc = "Sort buffers by name"
+    map("n", "<leader>bn", "<Cmd>BufferOrderByName<CR>", opts)
+    opts.desc = "Sort buffers by number"
+    map("n", "<leader>bb", "<Cmd>BufferOrderByName<CR>", opts)
+    opts.desc = "Pick buffer"
+    map("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
+    opts.desc = "Delete buffer"
+    map("n", "<leader>bd", "<Cmd>BufferDelete<CR>", opts)
  end,
   opts = {
     animation = true,

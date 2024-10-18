@@ -56,6 +56,7 @@ return {
     lualine.setup({
       options = {
         disabled_filetypes = { "lazy", "neo-tree" },
+        globalstatus = true,
         theme = extended_cyberdream,
         component_separators = "",
         section_separators = "",
