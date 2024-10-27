@@ -1,5 +1,19 @@
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("load_neo_tree", {}),
+  desc = "Loads neo-tree when openning a directory",
+  callback = function(args)
+    local stats = vim.uv.fs_stat(args.file)
+    if not stats or stats.type ~= "directory" then
+      return
+    end
+    require "neo-tree"
+    return true
+  end,
+})
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  event = "VeryLazy",
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -77,6 +91,7 @@ return {
     keymap.set("n", "<leader>eb", "<cmd>Neotree float buffers<CR>", { desc = "Go to git base" })
     keymap.set("n", "<leader>eg", "<cmd>Neotree float git_status git_base=main<CR>", { desc = "Go to git base" })
     keymap.set("n", "<leader>es", "<cmd>Neotree float document_symbols<CR>", { desc = "Go to git base" })
+
   end,
   priority = 51,
 }

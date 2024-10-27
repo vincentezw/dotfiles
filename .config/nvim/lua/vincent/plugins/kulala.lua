@@ -1,5 +1,6 @@
 return {
   'mistweaverco/kulala.nvim',
+  event = "VeryLazy",
   config = function()
     require('kulala').setup()
 

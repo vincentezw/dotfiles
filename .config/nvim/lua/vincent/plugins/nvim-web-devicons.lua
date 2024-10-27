@@ -1,5 +1,6 @@
 return {
   "DaikyXendo/nvim-material-icon",
+  event = "VeryLazy",
   config = function()
     require("nvim-web-devicons").setup({
       default = true,

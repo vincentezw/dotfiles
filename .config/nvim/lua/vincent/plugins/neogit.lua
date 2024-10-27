@@ -6,6 +6,7 @@ return {
     "sindrets/diffview.nvim", -- optional
     -- "ibhagwan/fzf-lua", -- optional
   },
+  event = "VeryLazy",
   config = function()
     require("neogit").setup({
       integrations = {

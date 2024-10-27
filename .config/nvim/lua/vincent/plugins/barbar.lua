@@ -2,7 +2,6 @@ return {
   "romgrk/barbar.nvim",
   dependencies = {
     "lewis6991/gitsigns.nvim",
-    -- "nvim-tree/nvim-web-devicons",
     "DaikyXendo/nvim-material-icon",
   },
   init = function()
@@ -64,6 +63,7 @@ return {
     map("n", "<leader>bb", "<Cmd>BufferOrderByName<CR>", opts)
     opts.desc = "Pick buffer"
     map("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
+    map("n", "<leader><leader>", "<Cmd>BufferPick<CR>", opts)
     opts.desc = "Delete buffer"
     map("n", "<leader>bd", "<Cmd>BufferDelete<CR>", opts)
  end,

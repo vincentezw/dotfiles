@@ -6,6 +6,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "DaikyXendo/nvim-material-icon",
   },
+  event = "VeryLazy",
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
