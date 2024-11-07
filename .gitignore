@@ -1,3 +1,4 @@
 .tmux/plugins/
 node_modules
+.config/sketchybar/plugins/spotify/credentials
 

@@ -1,11 +1,11 @@
 after-startup-command = [
   'exec-and-forget borders active_color=0xee33ccff inactive_color=0xaa595959 width=5.0',
-  'exec-and-forget /usr/local/bin/sketchybar',
+  'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 exec-on-workspace-change = [
     '/bin/bash',
     '-c',
-    '/usr/local/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
+    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
 ]
 start-at-login = true
 enable-normalization-flatten-containers = true
@@ -18,7 +18,7 @@ inner.horizontal = 8
 inner.vertical =   8
 outer.left =       5
 outer.bottom =     5
-outer.top =        25
+outer.top =        27
 outer.right =      5
 
 [[on-window-detected]]
