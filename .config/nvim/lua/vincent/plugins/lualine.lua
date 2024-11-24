@@ -61,6 +61,7 @@ return {
         component_separators = "",
         section_separators = "",
         color = { bg = nil },
+        globalstatus = true,
       },
       sections = {
         lualine_a = {
