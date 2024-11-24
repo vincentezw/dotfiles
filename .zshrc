@@ -76,6 +76,9 @@ else
   alias ls="eza --long --header --icons --git"
 fi
 
+export EDITOR=nvim
+export MANPAGER='nvim +Man!'
+
 # step notes with nb.sh if it's not already set up
 if [ ! -d "$HOME/.nb" ]; then
   # ${HOME}/dotfiles/nb-setup.sh
