@@ -71,7 +71,7 @@ clipboard() {
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
 if [ -n "$SPIN" ]; then
-  alias ls="eza --long --header --icons"
+  alias ls="exa --long --header --icons"
 else
   alias ls="eza --long --header --icons --git"
 fi
@@ -91,4 +91,3 @@ if [[ -d "$HOME/.cargo/bin" ]]; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/home/vincent/.local/share/gem/ruby/3.0.0/bin:/usr/bin:$PATH"
