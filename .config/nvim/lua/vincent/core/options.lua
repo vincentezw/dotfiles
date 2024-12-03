@@ -35,6 +35,16 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+opt.smoothscroll = true
+
+-- folding
+opt.foldexpr = "v:lua.require'vincent.core.folding'.foldexpr()"
+opt.foldtext = "v:lua.require'vincent.core.folding'.foldtext()"
+opt.foldmethod = "expr"
+opt.foldlevelstart = 99
+opt.foldcolumn = '1'
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldenable = true
 
 -- vim.cmd([[set noshowmode]])
 vim.cmd([[set noshowmode noruler]])
