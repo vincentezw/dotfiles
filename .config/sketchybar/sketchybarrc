@@ -18,14 +18,23 @@ DARK=0xcc232323
 AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
 AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
+hostname=$(hostname)
+if [ "$hostname" = "Vincents-MBP-2" ]; then
+  padding_right=1550
+  padding_left=1550
+else
+  padding_right=20
+  padding_left=20
+fi
+
 bar=(
   height=26
   color=0x00000000
   border_width=0
   position=top
   sticky=on
-  padding_right=20
-  padding_left=20
+  padding_right=$padding_right
+  padding_left=$padding_left
   topmost=window
 )
 
