@@ -1,16 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
 calendar=(
-  icon=􀐫
-  icon.font="$FONT:Black:12.0"
-  icon.padding_right=0
-  label.align=right
   padding_left=15
-  update_freq=30
-  script="$PLUGIN_DIR/calendar.sh"
-  click_script="$PLUGIN_DIR/zen.sh"
+  background.color=$DARK
+  background.corner_radius=12
+  background.height=20
+  background.padding_left=0
+  background.padding_right=5
+  label.font="$FONT:$TEXT:12.0"
+  label.padding_left=4
+  label.padding_right=12
+  script="$PLUGIN_DIR/next-cal.sh"
+  update_freq=1500
 )
-
-sketchybar --add item calendar right       \
-           --set calendar "${calendar[@]}" \
-           --subscribe calendar system_woke
+sketchybar --add item calendar center \
+  --set calendar "${calendar[@]}"
