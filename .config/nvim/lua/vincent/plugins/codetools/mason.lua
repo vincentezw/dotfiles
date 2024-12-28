@@ -41,7 +41,7 @@ return {
         "sorbet",
       },
       -- auto-install configured servers (with lspconfig)
-      automatic_installation = { exclude = {"gopls"}},
+      automatic_installation = { exclude = {"starpls", "gopls"}},
     })
 
     mason_tool_installer.setup({
