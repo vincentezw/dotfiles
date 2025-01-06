@@ -1,0 +1,8 @@
+fd
+tmux
+wezterm
+bat
+eza
+sketchybar
+zsh-autosuggestions
+

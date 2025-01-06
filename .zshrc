@@ -3,6 +3,7 @@ alias vi="nvim"
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
+export BAT_THEME="OneHalfLight"
 plugins=(
   colored-man-pages
   git
@@ -61,8 +62,9 @@ clipboard() {
   printf "\033]52;c;$(printf '%s' "$data" | base64 | tr -d '\n')\a"
 }
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
@@ -79,11 +81,6 @@ fi
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 
-# step notes with nb.sh if it's not already set up
-if [ ! -d "$HOME/.nb" ]; then
-  # ${HOME}/dotfiles/nb-setup.sh
-fi
-
 if [[ -d "/opt/dev/bin" ]]; then
   PATH="/opt/dev/bin:$PATH"
 fi
@@ -91,3 +88,4 @@ if [[ -d "$HOME/.cargo/bin" ]]; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi
 export PATH="$HOME/.local/bin:$PATH"
+eval $(thefuck --alias)
