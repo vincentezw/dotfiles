@@ -47,7 +47,7 @@ return {
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
       opts.desc = "Show buffer diagnostics"
       -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-      keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').lsp_diagnostics({ bufnr = 0 })<CR>", opts) -- show diagnostics for file
+      keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').diagnostics_document()<CR>", opts) -- show diagnostics for file
       opts.desc = "Show line diagnostics"
       keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({border = 'rounded'}) end, opts)
       opts.desc = "󰒮 diagnostic"
