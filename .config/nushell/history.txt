@@ -1,0 +1,19 @@
+ls
+eza
+$nu.config-path
+ls
+nvim ~/.config/nushell/config.nu
+ls
+which nu
+chsh
+cd dotfiles/
+cd .config/
+cp -R ~/.config/nushell .
+cd dotfiles/
+git status
+git stash
+git pull
+git status
+nvim .gitignore
+git status
+chsh

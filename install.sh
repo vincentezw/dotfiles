@@ -4,7 +4,7 @@ mkdir -p ~/.tmux/plugins
 
 source_dir="${HOME}/dotfiles/.config"
 target_dir="${HOME}/.config"
-subdirs=("nvim" "kitty" "hyper")
+subdirs=("nushell" "nvim" "kitty" "hyper")
 
 for subdir in "${subdirs[@]}"; do
   ln -sf "${source_dir}/${subdir}" "${target_dir}/${subdir}"
@@ -15,7 +15,7 @@ ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.t
 ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 
 if [ -n "$SPIN" ]; then
-  apt_packages=("exa" "tmux" "fzf" "isort" "pylint" "black")
+  apt_packages=("exa" "tmux" "fzf" "isort" "pylint" "black" "nushell")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
@@ -38,16 +38,11 @@ if [ -n "$SPIN" ]; then
     echo "Gem bin path added to PATH."
   fi
 
-  # NEOVIM_VERSION=0.10.0
-  # wget -qO nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim-linux64.tar.gz \
-  #   && sudo tar -C /usr/local --strip-components=1 -xf nvim-linux64.tar.gz \
-  #   && rm nvim-linux64.tar.gz
   nvim --headless "+Lazy! restore" +qa
 else
   ln -sf ${HOME}/dotfiles/.npmrc ${HOME}/.npmrc
   sudo gem install neovim
 fi
-npm install -g neovim nb.sh
-[ -f $HOME/.local/bin/nb ] && $HOME/.local/bin/nb completions install
+npm install -g neovim
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

@@ -1,4 +1,5 @@
 .tmux/plugins/
 node_modules
 .config/sketchybar/plugins/spotify/credentials
+.config/nushell/history.txt
 
