@@ -15,4 +15,7 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
+$env.config.buffer_editor = "nvim"
+$env.config.show_banner = false
+
 alias cat = bat
