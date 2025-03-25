@@ -1,3 +1,22 @@
+load-env (/opt/homebrew/bin/fnm env --shell bash
+    | lines
+    | str replace 'export ' ''
+    | str replace -a '"' ''
+    | split column '='
+    | rename name value
+    | where name != "FNM_ARCH" and name != "PATH"
+    | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value }
+)
+
+$env.PATH = ($env.PATH
+    | split row (char esep)
+    | prepend $"($env.FNM_MULTISHELL_PATH)/bin"
+    | prepend "/opt/homebrew/bin"
+    | prepend $"($env.HOME)/.rbenv/shims"
+    | prepend "/opt/dev/bin"
+
+)
+
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {

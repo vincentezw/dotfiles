@@ -1,11 +1,16 @@
 after-startup-command = [
   'exec-and-forget borders active_color=0xee33ccff inactive_color=0xaa595959 width=5.0',
-  'exec-and-forget /opt/homebrew/bin/sketchybar',
+  'exec-and-forget /bin/bash -c /opt/homebrew/bin/sketchybar',
 ]
+# exec-on-workspace-change = [
+#     '/bin/bash',
+#     '-c',
+#     '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
+# ]
 exec-on-workspace-change = [
     '/bin/bash',
     '-c',
-    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
+    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE && /Users/vincent/.config/aerospace/float-pip.sh',
 ]
 start-at-login = true
 enable-normalization-flatten-containers = true
@@ -80,3 +85,8 @@ l = 'resize width +50'
 enter = 'mode main'
 esc = 'mode main'
 
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    if.window-title-regex-substring = 'about:blank'
+    check-further-callbacks = true
+    run = ['layout floating']

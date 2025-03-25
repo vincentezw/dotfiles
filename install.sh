@@ -15,7 +15,7 @@ ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.t
 ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
 
 if [ -n "$SPIN" ]; then
-  apt_packages=("exa" "tmux" "fzf" "isort" "pylint" "black" "nushell")
+  apt_packages=("exa" "tmux" "fzf" "isort" "pylint" "black" "nushell" "thefuck")
   for package in "${apt_packages[@]}"; do
     if ! dpkg -l | grep -q "$package"; then
       sudo apt-get install -y "$package"
