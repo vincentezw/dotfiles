@@ -11,11 +11,23 @@ return {
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+    -- Configure hover with rounded border
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
       vim.lsp.handlers.hover, {
         border = "rounded"
       }
     )
+    vim.diagnostic.config({
+      -- virtual_text = {
+      --   prefix = "●",
+      --   spacing = 1,
+      -- },
+      virtual_lines = {
+        current_line = true,
+        prefix = "●",
+        spacing = 1,
+      },
+    })
 
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
@@ -51,9 +63,9 @@ return {
       opts.desc = "Show line diagnostics"
       keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({border = 'rounded'}) end, opts)
       opts.desc = "󰒮 diagnostic"
-      keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+      keymap.set("n", "[d", function() vim.diagnostic.jump({count=-1, float=true}) end, opts) -- jump to previous diagnostic in buffer
       opts.desc = "󰒭 diagnostic"
-      keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+      keymap.set("n", "]d", function() vim.diagnostic.jump({count=1, float=true}) end, opts) -- jump to next diagnostic in buffer
       -- opts.desc = "Show documentation for what is under cursor"
       -- keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
       opts.desc = "Restart LSP"
