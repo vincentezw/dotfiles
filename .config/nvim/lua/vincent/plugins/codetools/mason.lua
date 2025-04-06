@@ -1,3 +1,8 @@
+local light_mode = vim.env.LIGHT_NVIM == "1"
+if light_mode then
+  return {}
+end
+
 return {
   "williamboman/mason-lspconfig.nvim",
   dependencies = {

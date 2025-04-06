@@ -1,3 +1,16 @@
+local light_mode = vim.env.LIGHT_NVIM == "1"
+
+local deps = {
+  "nvim-lua/plenary.nvim",
+  "nvim-tree/nvim-web-devicons",
+  "MunifTanjim/nui.nvim",
+  "kevinhwang91/nvim-ufo",
+}
+
+if not light_mode then
+  table.insert(deps, "3rd/image.nvim")
+end
+
 vim.api.nvim_create_autocmd("BufEnter", {
   group = vim.api.nvim_create_augroup("load_neo_tree", {}),
   desc = "Loads neo-tree when openning a directory",
@@ -15,13 +28,7 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   event = "VeryLazy",
   branch = "v3.x",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-    "MunifTanjim/nui.nvim",
-    "3rd/image.nvim",
-    "kevinhwang91/nvim-ufo",
-  },
+  dependencies = deps,
   config = function()
     local status_ok, neo_tree = pcall(require, "neo-tree")
     if not status_ok then
