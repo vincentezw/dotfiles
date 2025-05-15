@@ -23,8 +23,12 @@ inner.horizontal = 8
 inner.vertical =   8
 outer.left =       5
 outer.bottom =     5
-outer.top =        27
+# outer.top =        27
 outer.right =      5
+outer.top = [
+    { monitor.'built-in' = 2 },
+    27
+]
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
