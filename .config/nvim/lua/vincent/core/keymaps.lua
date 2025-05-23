@@ -37,3 +37,5 @@ keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFix<CR>', {noremap = true,
 -- keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFixDiagnostic<CR>', {noremap = true, silent = true, desc = '󰭹 Fix diagnostic'})
 keymap.set({'n', 'v'}, '<leader>co', '<cmd>CopilotChatOptimize<CR>', {noremap = true, silent = true, desc = '󰭹 Optimize selection'})
 keymap.set({'n', 'v'}, '<leader>cm', '<cmd>CopilotChatCommitStaged<CR>', {noremap = true, silent = true, desc = '󰭹 Write commit message'})
+
+keymap.set("n", "<leader>cf", ":let @+=expand('%:p')<CR>", { desc = "Copy current file name to clipboard" })
