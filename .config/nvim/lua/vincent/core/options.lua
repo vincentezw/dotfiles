@@ -48,3 +48,18 @@ opt.foldcolumn = '1'
 
 -- vim.cmd([[set noshowmode]])
 vim.cmd([[set noshowmode noruler]])
+vim.filetype.add({
+  extension = {
+    mc = "monkeyc",
+  },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "monkeyc",
+  callback = function()
+    vim.cmd([[set syntax=java]])
+    vim.opt_local.iskeyword:append(":")
+    vim.opt_local.iskeyword:append("_")
+  end,
+})
+

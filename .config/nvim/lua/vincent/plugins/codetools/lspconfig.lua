@@ -11,12 +11,6 @@ return {
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    -- Configure hover with rounded border
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover, {
-        border = "rounded"
-      }
-    )
     vim.diagnostic.config({
       -- virtual_text = {
       --   prefix = "●",
@@ -31,6 +25,18 @@ return {
 
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
+
+    -- Monkey C stuff
+    local function get_monkey_language_server_path()
+      local workspace_dir = table.concat(vim.fn.readfile(vim.fn.expand("~/Library/Application Support/Garmin/ConnectIQ/current-sdk.cfg")), "\n")
+      local jar_path = workspace_dir .. "/bin/LanguageServer.jar"
+
+      if vim.fn.filereadable(jar_path) == 1 then
+        return jar_path
+      end
+      print("Monkey C Language Server not found: " .. jar_path)
+      return nil
+    end
 
     local on_attach = function(client, bufnr)
       local attach_navic = true
@@ -66,8 +72,8 @@ return {
       keymap.set("n", "[d", function() vim.diagnostic.jump({count=-1, float=true}) end, opts) -- jump to previous diagnostic in buffer
       opts.desc = "󰒭 diagnostic"
       keymap.set("n", "]d", function() vim.diagnostic.jump({count=1, float=true}) end, opts) -- jump to next diagnostic in buffer
-      -- opts.desc = "Show documentation for what is under cursor"
-      -- keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+      opts.desc = "Show documentation for what is under cursor"
+      keymap.set("n", "K", function() vim.lsp.buf.hover { border = 'rounded' } end, opts) -- show documentation for what is under cursor
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
     end
@@ -88,8 +94,81 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    -- Shopify's ruby lsp
     local configs = require("lspconfig.configs")
+
+    -- Monkey C
+    local monkeyc_lsp_jar = get_monkey_language_server_path()
+    local monkeycLspCapabilities = nil
+    if monkeyc_lsp_jar then
+      monkeycLspCapabilities = vim.lsp.protocol.make_client_capabilities()
+      -- Need to set some variables in the client capabilities to prevent the
+      -- LanguageServer from raising exceptions
+      monkeycLspCapabilities.textDocument.declaration.dynamicRegistration = true
+      monkeycLspCapabilities.textDocument.implementation.dynamicRegistration = true
+      monkeycLspCapabilities.textDocument.typeDefinition.dynamicRegistration = true
+      monkeycLspCapabilities.textDocument.documentHighlight.dynamicRegistration = true
+      monkeycLspCapabilities.workspace = {
+        didChangeWorkspaceFolders = {
+          dynamicRegistration = true,
+        },
+      }
+      monkeycLspCapabilities.textDocument.foldingRange = {
+        lineFoldingOnly = true,
+        dynamicRegistration = true,
+      }
+    end
+
+    if monkeyc_lsp_jar and not configs.monkeyc_ls then
+      local root = lspconfig.util.root_pattern("manifest.xml") or vim.fn.getcwd()
+      local project_root = (lspconfig.util.root_pattern("manifest.xml"))(vim.fn.getcwd()) or vim.fn.getcwd()
+      configs.monkeyc_ls = {
+        default_config = {
+          cmd = {
+            "java",
+            "-Dapple.awt.UIElement=true",
+            "-classpath",
+            monkeyc_lsp_jar,
+            "com.garmin.monkeybrains.languageserver.LSLauncher",
+          },
+          filetypes = { "monkeyc", "jungle", "mss" },
+          root_dir = root,
+          settings = {
+            {
+              developerKeyPath = vim.g.monkeyc_connect_iq_dev_key_path
+                or vim.fn.expand("~/garmin-apps/"),
+              compilerWarnings = true,
+              compilerOptions = vim.g.monkeyc_compiler_options or "",
+              developerId = "",
+              jungleFiles = "monkey.jungle",
+              javaPath = "",
+              typeCheckLevel = "Default",
+              optimizationLevel = "Default",
+              testDevices = {
+                "venu3", -- get this dynamically from the manifest file
+              },
+              debugLogLevel = "Default",
+            },
+          },
+          capabilities = monkeycLspCapabilities,
+          init_options = {
+            publishWarnings = vim.g.monkeyc_publish_warnings or true,
+            compilerOptions = vim.g.monkeyc_compiler_options or "",
+            typeCheckMsgDisplayed = true,
+            workspaceSettings = {
+              {
+                path = root(vim.fn.getcwd()),
+                jungleFiles = {
+                  project_root .. "/monkey.jungle",
+                  -- root(vim.fn.getcwd()) .. "/monkey.jungle",
+                },
+              },
+            },
+          },
+        },
+      }
+    end
+
+    -- Shopify's ruby lsp
     local util = require 'lspconfig/util'
 
     if not configs.ruby_lsp then
@@ -127,6 +206,7 @@ return {
     end
 
     local lsp_servers = {
+      'monkeyc_ls',
       'ruby_lsp',
       'html',
       'ts_ls',

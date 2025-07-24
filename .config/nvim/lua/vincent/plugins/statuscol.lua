@@ -20,7 +20,7 @@ return {
           colwidth = 2,
           click = "v:lua.ScFa",
         },
-        { text = { " %s" }, click = "v:lua.ScSa" },
+        { text = { "%s" }, click = "v:lua.ScSa" },
         { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
       },
     })
