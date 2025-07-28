@@ -28,13 +28,27 @@ return {
 
     -- Monkey C stuff
     local function get_monkey_language_server_path()
-      local workspace_dir = table.concat(vim.fn.readfile(vim.fn.expand("~/Library/Application Support/Garmin/ConnectIQ/current-sdk.cfg")), "\n")
+      local cfg_path
+      local os_name = vim.loop.os_uname().sysname:lower()
+
+      if os_name == "linux" then
+        cfg_path = vim.fn.expand("~/.Garmin/ConnectIQ/current-sdk.cfg") -- Linux path
+      else
+        -- Default to Mac path for other OS (primarily macOS)
+        cfg_path = vim.fn.expand("~/Library/Application Support/Garmin/ConnectIQ/current-sdk.cfg")
+      end
+
+      if vim.fn.filereadable(cfg_path) ~= 1 then
+        return nil
+      end
+  
+      local workspace_dir = table.concat(vim.fn.readfile(cfg_path), "\n")
       local jar_path = workspace_dir .. "/bin/LanguageServer.jar"
 
       if vim.fn.filereadable(jar_path) == 1 then
         return jar_path
       end
-      print("Monkey C Language Server not found: " .. jar_path)
+
       return nil
     end
 
@@ -67,7 +81,13 @@ return {
       -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
       keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').diagnostics_document()<CR>", opts) -- show diagnostics for file
       opts.desc = "Show line diagnostics"
-      keymap.set("n", "<leader>d", function() vim.diagnostic.open_float({border = 'rounded'}) end, opts)
+      keymap.set("n", "<leader>d", function() 
+        vim.diagnostic.open_float({
+          border = 'rounded',
+          focus = false,
+          source = 'always',
+        }) 
+      end, opts)
       opts.desc = "󰒮 diagnostic"
       keymap.set("n", "[d", function() vim.diagnostic.jump({count=-1, float=true}) end, opts) -- jump to previous diagnostic in buffer
       opts.desc = "󰒭 diagnostic"
@@ -80,14 +100,7 @@ return {
 
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    -- comment out for ufo using LSP as fold provider
-    -- don't forget to disable treeseitter in the ufo config then
-    -- capabilities.textDocument.foldingRange = {
-    --   dynamicRegistration = false,
-    --   lineFoldingOnly = true
-    -- }
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
@@ -206,7 +219,6 @@ return {
     end
 
     local lsp_servers = {
-      'monkeyc_ls',
       'ruby_lsp',
       'html',
       'ts_ls',
@@ -222,28 +234,46 @@ return {
       'starpls',
     }
 
-    for _, lsp_server in pairs(lsp_servers) do
-      local filetypes
-      local root_dir
-      if lsp_server == 'graphql' then
-        filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" }
-      elseif lsp_server == 'ruby_lsp' then
-        filetypes = { "ruby" }
-      elseif lsp_server == 'starpls' then
-        filetypes = { "starlark" }
-        root_dir = function(fname)
-          return util.path.dirname(fname)
-        end
-      elseif lsp_server == 'emmet_ls' then
-        filetypes = { "html", "svelte", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" }
-      end
+    -- Only add monkeyc_ls if the language server JAR is available
+    if monkeyc_lsp_jar then
+      table.insert(lsp_servers, 'monkeyc_ls')
+    end
 
-      lspconfig[lsp_server].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = filetypes or lspconfig[lsp_server].document_config.default_config.filetypes,
-        root_dir = root_dir or lspconfig[lsp_server].document_config.default_config.root_dir,
-      })
+    for _, lsp_server in pairs(lsp_servers) do
+      -- Skip if the server doesn't exist in lspconfig
+      if lspconfig[lsp_server] then
+        local config = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }
+
+        -- Custom configurations for specific servers
+        if lsp_server == 'graphql' then
+          config.filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" }
+        elseif lsp_server == 'ruby_lsp' then
+          config.filetypes = { "ruby" }
+        elseif lsp_server == 'starpls' then
+          config.filetypes = { "starlark" }
+          config.root_dir = function(fname)
+            return util.path.dirname(fname)
+          end
+        elseif lsp_server == 'emmet_ls' then
+          config.filetypes = { "html", "svelte", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" }
+        end
+
+        -- Only try to access document_config if we haven't set custom filetypes or root_dir
+        if not config.filetypes and lspconfig[lsp_server].document_config and lspconfig[lsp_server].document_config.default_config then
+          config.filetypes = lspconfig[lsp_server].document_config.default_config.filetypes
+        end
+
+        if not config.root_dir and lspconfig[lsp_server].document_config and lspconfig[lsp_server].document_config.default_config then
+          config.root_dir = lspconfig[lsp_server].document_config.default_config.root_dir
+        end
+
+        lspconfig[lsp_server].setup(config)
+      else
+        print("LSP server not found: " .. lsp_server)
+      end
     end
 
     -- configure lua server (with special settings)
