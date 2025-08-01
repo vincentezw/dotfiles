@@ -8,14 +8,14 @@ local font_size = wezterm.hostname() == "ashi" and 11.0 or 14.0
 local theme = {
   background = "#161616",
   foreground = "#f4f4f4",
-  brights = {
-    "#f4f4f4",
-    "#ff9e64",
-    "#6ACBCB",
-    "#CE27BD",
-    "#06a4c7",
-    "#9F5D62",
-    "#B5A075",
+  colours = {
+    white = "#f4f4f4",
+    orange = "#ff9e64",
+    teal = "#6ACBCB",
+    pink = "#CE27BD",
+    cyan = "#06a4c7",
+    brown = "#9F5D62",
+    yellow = "#B5A075",
   },
   panel = {
     background = "#161616",
@@ -75,7 +75,7 @@ wezterm.on(
 )
 local dimmer = { brightness = 0.5 }
 
-config = {
+local config = {
   background = {
     {
       height = '100%',
@@ -112,11 +112,16 @@ config = {
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
+  inactive_pane_hsb = {
+    saturation = 0.8,
+    brightness = 0.5,
+  },
   colors = {
     background = theme.background,
     tab_bar = {
       background = theme.panel.background,
     },
+    split = theme.colours.cyan,
   },
   keys = {
     {

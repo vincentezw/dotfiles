@@ -4,12 +4,13 @@ mkdir -p ~/.tmux/plugins
 
 source_dir="${HOME}/dotfiles/.config"
 target_dir="${HOME}/.config"
-subdirs=("nushell" "nvim" "kitty" "hyper")
+subdirs=("nushell" "nvim" "hyper")
 
 for subdir in "${subdirs[@]}"; do
   ln -sf "${source_dir}/${subdir}" "${target_dir}/${subdir}"
 done
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
+ln -sf "${HOME}/dotfiles/.config/wezterm" "${HOME}/.config/wezterm"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
 ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
