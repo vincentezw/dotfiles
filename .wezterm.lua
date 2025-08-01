@@ -46,12 +46,6 @@ end
 
 local window_decorations = is_linux and "NONE" or "RESIZE"
 
-wezterm.on('user-var-changed', function(window, pane, name, value)
-  print(name)
-  print(value)
-  print("yeah")
-end)
-
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
@@ -81,7 +75,7 @@ wezterm.on(
 )
 local dimmer = { brightness = 0.5 }
 
-return {
+config = {
   background = {
     {
       height = '100%',
@@ -101,6 +95,13 @@ return {
       },
     },
   },
+  ssh_domains = {
+    {
+      name = 'xena',
+      remote_address = '192.168.0.10',
+      username = 'vincent',
+    },
+  },
   front_end = "WebGpu",
   webgpu_power_preference = "HighPerformance",
   enable_wayland = true,
@@ -115,6 +116,18 @@ return {
     background = theme.background,
     tab_bar = {
       background = theme.panel.background,
+    },
+  },
+  keys = {
+    {
+      key = "%",
+      mods = "CTRL|SHIFT",
+      action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" },
+    },
+    {
+      key = "\"",
+      mods = "CTRL|SHIFT",
+      action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" },
     },
   },
   max_fps = 120,
@@ -140,3 +153,25 @@ return {
     top = 13, bottom = 0,
   },
 }
+
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+-- you can put the rest of your Wezterm config here
+smart_splits.apply_to_config(config, {
+  -- the default config is here, if you'd like to use the default keys,
+  -- you can omit this configuration table parameter and just use
+  -- smart_splits.apply_to_config(config)
+
+  -- directional keys to use in order of: left, down, up, right
+  direction_keys = { 'h', 'j', 'k', 'l' },
+  -- if you want to use separate direction keys for move vs. resize, you
+  -- can also do this:
+  -- modifier keys to combine with direction_keys
+  modifiers = {
+    move = 'CTRL', -- modifier to use for pane movement, e.g. CTRL+h to move left
+    resize = 'META', -- modifier to use for pane resize, e.g. META+h to resize to the left
+  },
+  -- log level to use: info, warn, error
+  log_level = 'info',
+})
+
+return config
