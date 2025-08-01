@@ -89,6 +89,11 @@ fi
 if [[ -d "$HOME/.cargo/bin" ]]; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+if [ -d "$(ruby -e 'puts Gem.user_dir')/bin" ]; then
+  export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 export PATH="$HOME/.local/bin:$PATH"
 eval $(thefuck --alias)
 

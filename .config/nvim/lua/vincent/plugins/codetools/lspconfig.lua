@@ -232,6 +232,7 @@ return {
       'gopls',
       'rust_analyzer',
       'starpls',
+      'svelte',
     }
 
     -- Only add monkeyc_ls if the language server JAR is available
