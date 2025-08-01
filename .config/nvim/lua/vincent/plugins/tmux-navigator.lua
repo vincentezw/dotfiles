@@ -1,9 +1,9 @@
 return {
-  'alexghergh/nvim-tmux-navigation',
+  'mrjones2014/smart-splits.nvim',
   config = function()
-    local nvim_tmux_nav = require('nvim-tmux-navigation')
+    local nvim_smart_splits = require('smart-splits')
 
-    nvim_tmux_nav.setup {
+    nvim_smart_splits.setup {
       disable_when_zoomed = false,
       keybindings = {
         left = "<C-h>",
