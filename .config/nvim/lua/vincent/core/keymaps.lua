@@ -33,7 +33,7 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 keymap.set({'n', 'v'}, '<leader>cc', '<cmd>CopilotChatToggle<CR>', {noremap = true, silent = true, desc = '󰭹 Open chat'})
 keymap.set({'n', 'v'}, '<leader>cr', '<cmd>CopilotChatReview<CR>', {noremap = true, silent = true, desc = '󰭹 Review selection'})
-keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFix<CR>', {noremap = true, silent = true, desc = '󰭹 Fix a problem in the selection'})
+keymap.set({'n', 'v'}, '<leader>cF', '<cmd>CopilotChatFix<CR>', {noremap = true, silent = true, desc = '󰭹 Fix a problem in the selection'})
 -- keymap.set({'n', 'v'}, '<leader>cf', '<cmd>CopilotChatFixDiagnostic<CR>', {noremap = true, silent = true, desc = '󰭹 Fix diagnostic'})
 keymap.set({'n', 'v'}, '<leader>co', '<cmd>CopilotChatOptimize<CR>', {noremap = true, silent = true, desc = '󰭹 Optimize selection'})
 keymap.set({'n', 'v'}, '<leader>cm', '<cmd>CopilotChatCommitStaged<CR>', {noremap = true, silent = true, desc = '󰭹 Write commit message'})
