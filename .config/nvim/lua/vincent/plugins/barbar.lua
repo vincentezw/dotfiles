@@ -55,7 +55,7 @@ return {
     map("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
     map("n", "<leader><leader>", "<Cmd>BufferPick<CR>", opts)
     opts.desc = "Delete buffer"
-    map("n", "<leader>bd", "<Cmd>BufferDelete<CR>", opts)
+    map("n", "<leader>bx", "<Cmd>BufferDelete<CR>", opts)
  end,
   opts = {
     animation = true,
