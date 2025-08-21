@@ -1,6 +1,13 @@
 return {
   'mrjones2014/smart-splits.nvim',
+  priority = 1,
+  lazy = false,
+  init = function()
+    -- Set multiplexer integration before plugin loads
+    vim.g.smart_splits_multiplexer_integration = 'wezterm'
+  end,
   config = function()
+    -- vim.g.smart_splits_multiplexer_integration = 'wezterm'
     local nvim_smart_splits = require('smart-splits')
 
     nvim_smart_splits.setup {
