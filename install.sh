@@ -11,6 +11,7 @@ for subdir in "${subdirs[@]}"; do
 done
 ln -sf "${HOME}/dotfiles/.config/starship.toml" "${HOME}/.config/starship.toml"
 ln -sf "${HOME}/dotfiles/.config/wezterm" "${HOME}/.config/wezterm"
+ln -sf "${HOME}/dotfiles/.config/zk" "${HOME}/.config/zk"
 ln -s "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/dotfiles/.tmux/vincent-theme.tmux" "${HOME}/.tmux/vincent-theme.tmux"
 ln -sf ${HOME}/dotfiles/.zshrc ${HOME}/.zshrc
