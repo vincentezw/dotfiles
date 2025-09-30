@@ -4,7 +4,17 @@ return {
   dependencies = { "DaikyXendo/nvim-material-icon" },
   config = function()
     local fzf = require("fzf-lua")
-    fzf.setup({})
+    fzf.setup({
+      grep = {
+        rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+        git_icons = true,
+        file_icons = true,
+      },
+      files = {
+        rg_opts = "--files --hidden --follow -g '!.git'",
+        fd_opts = "--color=never --type f --hidden --follow --exclude .git",
+      }
+    })
     local keymap = vim.keymap -- for conciseness
     --
     keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Fuzzy find files in cwd" })

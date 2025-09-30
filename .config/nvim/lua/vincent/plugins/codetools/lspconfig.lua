@@ -25,6 +25,30 @@ return {
 
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
+    
+    -- Set global diagnostic keybindings (available even without LSP attached)
+    keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').diagnostics_document()<CR>", { noremap = true, silent = true, desc = "Show buffer diagnostics" })
+    keymap.set("n", "<leader>d", function() 
+      vim.diagnostic.open_float({
+        border = 'rounded',
+        focus = false,
+        source = 'always',
+      }) 
+    end, { noremap = true, silent = true, desc = "Show line diagnostics" })
+    keymap.set("n", "<leader>dy", function()
+      local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
+      if #diagnostics > 0 then
+        local messages = {}
+        for _, diagnostic in ipairs(diagnostics) do
+          table.insert(messages, diagnostic.message)
+        end
+        local text = table.concat(messages, ' | ')
+        vim.fn.setreg('+', text)
+        vim.notify('Diagnostic yanked: ' .. text, vim.log.levels.INFO)
+      else
+        vim.notify('No diagnostics on this line', vim.log.levels.WARN)
+      end
+    end, { noremap = true, silent = true, desc = "Yank diagnostic message to clipboard" })
 
     -- Monkey C stuff
     local function get_monkey_language_server_path()
@@ -77,17 +101,7 @@ return {
       keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
       opts.desc = "Smart rename"
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-      opts.desc = "Show buffer diagnostics"
-      -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-      keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').diagnostics_document()<CR>", opts) -- show diagnostics for file
-      opts.desc = "Show line diagnostics"
-      keymap.set("n", "<leader>d", function() 
-        vim.diagnostic.open_float({
-          border = 'rounded',
-          focus = false,
-          source = 'always',
-        }) 
-      end, opts)
+      -- Diagnostic keybindings are now set globally above
       opts.desc = "󰒮 diagnostic"
       keymap.set("n", "[d", function() vim.diagnostic.jump({count=-1, float=true}) end, opts) -- jump to previous diagnostic in buffer
       opts.desc = "󰒭 diagnostic"
@@ -196,7 +210,7 @@ return {
 
       configs.ruby_lsp = {
         default_config = {
-          cmd = { "ruby-lsp" },
+          cmd = { "bundle", "exec", "ruby-lsp" },
           filetypes = { "ruby" },
           root_dir = util.root_pattern("Gemfile", ".git"),
           init_options = {
