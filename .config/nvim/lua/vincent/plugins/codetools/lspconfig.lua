@@ -25,15 +25,15 @@ return {
 
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
-    
+
     -- Set global diagnostic keybindings (available even without LSP attached)
     keymap.set("n", "<leader>D", "<cmd>lua require('fzf-lua').diagnostics_document()<CR>", { noremap = true, silent = true, desc = "Show buffer diagnostics" })
-    keymap.set("n", "<leader>d", function() 
+    keymap.set("n", "<leader>d", function()
       vim.diagnostic.open_float({
         border = 'rounded',
         focus = false,
         source = 'always',
-      }) 
+      })
     end, { noremap = true, silent = true, desc = "Show line diagnostics" })
     keymap.set("n", "<leader>dy", function()
       local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
@@ -65,7 +65,7 @@ return {
       if vim.fn.filereadable(cfg_path) ~= 1 then
         return nil
       end
-  
+
       local workspace_dir = table.concat(vim.fn.readfile(cfg_path), "\n")
       local jar_path = workspace_dir .. "/bin/LanguageServer.jar"
 
@@ -115,7 +115,7 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
