@@ -1,29 +1,33 @@
-@define-color bubble-bg rgba(149, 173, 173, 0.6);
-@define-color bubble-inactive-bg rgba(120, 171, 171, 0.8);
+@define-color panel-bg rgba(149, 173, 173, 0.6);
+@define-color button-inactive-bg rgba(100, 151, 151, 0.8);
 @define-color bubble-active-bg rgba(57, 153, 153, 0.8);
-@define-color text rgba(250, 250, 250, 0.9);
+/* @define-color text rgba(250, 250, 250, 0.9); */
+@define-color text rgba(35, 35, 35, 0.9);
 @define-color text-dark rgba(35,35,35,0.8);
 
 * {
   font-family: "VictorMono Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-weight: bold;
   border: none;
   border-radius: 0px;
   padding: 0;
   margin: 0;
 }
 
+window {
+  margin: 5px;
+}
+
 window#waybar {
-  background-color: rgba(0,0,0,0.8);
-  background: transparent;
+  background-color: @panel-bg;
+  margin: 15px;
   transition-property: background-color;
   transition-duration: .5s;
 }
 
 #workspaces {
-  background: @bubble-bg;
   margin: 0px 5px 0px 0px;
   padding: 1px;
-  border-radius: 15px;
   border: 0px;
   font-weight: bold;
   font-style: normal;
@@ -35,10 +39,9 @@ window#waybar {
 #workspaces button {
   padding: 0px 5px;
   margin: 0px 2px;
-  border-radius: 15px;
   border: 0px;
   color: @text;
-  background-color: @bubble-inactive-bg;
+  background-color: @button-inactive-bg;
   transition: all 0.3s ease-in-out;
   opacity: 0.4;
 }
