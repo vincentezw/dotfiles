@@ -43,6 +43,12 @@ return {
           "gitignore",
           "query",
           "ruby",
+          "python",
+          "go",
+          "gomod",
+          "gosum",
+          "gowork",
+          "starlark",
         },
         incremental_selection = {
           enable = true,

@@ -97,10 +97,20 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 eval $(thefuck --alias)
 
+# ZK_NOTEBOOK_DIR: Set the notebook directory, checking for the first existing path
+notebook_paths=(
+  "/mnt/notes"
+  "$HOME/notes"
+)
+for nb_path in "${notebook_paths[@]}"; do
+  if [ -d "$nb_path" ]; then
+    export ZK_NOTEBOOK_DIR="$nb_path"
+    break
+  fi
+done
+
 # cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/vincent/.kube/config:/Users/vincent/.kube/config.shopify.cloudplatform
 
-# Shopify Hydrogen alias to local projects
-alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
 for file in /Users/vincent/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases

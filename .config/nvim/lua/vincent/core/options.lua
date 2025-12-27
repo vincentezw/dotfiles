@@ -38,13 +38,20 @@ opt.swapfile = false
 opt.smoothscroll = true
 
 -- folding
-opt.foldexpr = "v:lua.require'vincent.core.folding'.foldexpr()"
-opt.foldtext = "v:lua.require'vincent.core.folding'.foldtext()"
-opt.foldmethod = "expr"
-opt.foldlevelstart = 99
-opt.foldcolumn = '1'
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.foldcolumn = "1"
+
+-- opt.foldexpr = "v:lua.require'vincent.core.folding'.foldexpr()"
+-- opt.foldtext = "v:lua.require'vincent.core.folding'.foldtext()"
+-- opt.foldmethod = "expr"
+-- opt.foldlevelstart = 99
+-- opt.foldenable = true
+-- opt.foldcolumn = '1'
 -- vim.opt.foldlevel = 99
--- vim.opt.foldenable = true
 
 -- vim.cmd([[set noshowmode]])
 vim.cmd([[set noshowmode noruler]])

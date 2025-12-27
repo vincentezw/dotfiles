@@ -1,5 +1,5 @@
 [notebook]
-dir = "~/zk"
+dir = "/mnt/notes/"
 
 [extra]
 author = "Vincent"
